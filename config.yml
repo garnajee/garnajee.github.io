@@ -1,0 +1,79 @@
+baseURL: https://jeans-github.github.io
+languageCode: en-us
+title: Jean SEVAUX
+
+theme: "PaperMod"
+
+paginate: 5
+
+enableRobotsTXT: true
+enableEmoji: true
+
+buildDrafts: false
+buildFuture: false
+buildExpired: false
+
+menu:
+  main:
+    - name: Links
+      url: /links
+      weight: 1
+
+    - name: Posts
+      url: /posts
+      weight: 2
+
+    - name: Contact
+      url: /contact/contact
+      weight: 3
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    - JSON
+
+params:
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowPostNavLinks: true    # Adds a Previous / Next post suggestion under a single post
+  ShowCodeCopyButtons: true
+  ShowRssButtonInSectionTermList: true
+  ShowToc: true   # Table of Content
+  ShowBreadCrumbs: true # fil d'ariane
+
+# **************************************************
+  profileMode:
+    enabled: true
+    #title: "\\> Hello there <"
+    title: "\\> Bienvenue \U0001F44B <"
+    subtitle: "*Check my github reposiories and add \U00002B50!*"
+    imageUrl: "/images/gorilla-reduce.jpg"
+    imageTitle: "General Kenobi"
+    #imageWidth: 120 # custom size
+    #imageHeight: 120 # custom size
+    buttons:
+      - name: About Me
+        url: "/about"
+      - name: Posts
+        url: "/posts"
+
+# **************************************************
+  homeInfoParams:
+    enabled: false
+    Title: "\\> Hi there \U0001F44B"
+    Content: >
+      Welcome to my personal website!
+
+        - Do give a 🌟 on my Github repos!
+        - check about page, to know more about me
+
+# **************************************************
+  socialIcons:
+    - name: "LinkedIn"
+      url: "https://linkedin.com/in/jean-sevaux"
+    - name: "Github"
+      url: "https://github.com/JeanS-github"
+    - name: Rss
+      url: "index.xml"
+
