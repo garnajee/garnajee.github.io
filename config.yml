@@ -41,6 +41,7 @@ params:
   ShowRssButtonInSectionTermList: true
   ShowToc: true   # Table of Content
   ShowBreadCrumbs: true # fil d'ariane
+  ShowSummary: true # issue when building it on github
 
 # **************************************************
   profileMode:
