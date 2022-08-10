@@ -37,6 +37,7 @@ outputs:
     - JSON
 
 params:
+  env: production
   ShowShareButtons: true
   ShowReadingTime: true
   ShowPostNavLinks: true    # Adds a Previous / Next post suggestion under a single post
