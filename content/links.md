@@ -24,5 +24,5 @@ draft: true
 
 # Others
 
-[xt](https://extreme-down.info)
+[//]: this should be a comment
 

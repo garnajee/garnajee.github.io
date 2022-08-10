@@ -9,9 +9,9 @@ draft: false
 
 Welcome to my blog!
 
-This is my personnal website.
+This is my personal website.
 
-I use it to note, save, share, etc what I found either on the internet or by myself, and obvisouly mostly computer-related.
+I use it to note, save, share, etc what I found either on the internet or by myself, and obviously mostly computer-related.
 
 # Who am I
 
