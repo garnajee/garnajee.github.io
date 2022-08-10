@@ -9,6 +9,11 @@ paginate: 5
 enableRobotsTXT: true
 enableEmoji: true
 
+taxonomies:
+  category: categories
+  series: series
+  tag: tags
+
 menu:
   main:
     - name: Links
