@@ -43,14 +43,14 @@ params:
   ShowCodeCopyButtons: true
   ShowRssButtonInSectionTermList: true
   ShowToc: true   # Table of Content
-  ShowBreadCrumbs: true # fil d'ariane
+  ShowBreadCrumbs: true # fil d'Ariane
 
 # **************************************************
   profileMode:
     enabled: true
     #title: "\\> Hello there <"
     title: "\\> Bienvenue \U0001F44B <"
-    subtitle: "*Check my github reposiories and add \U00002B50!*"
+    subtitle: "*Check my Github repositories and add \U00002B50!*"
     imageUrl: "/images/gorilla-reduce.jpg"
     imageTitle: "General Kenobi"
     #imageWidth: 120 # custom size
