@@ -1,4 +1,4 @@
-baseURL: "https://jeans-github.github.io/"
+baseURL: https://jeans-github.github.io
 languageCode: en-us
 title: Jean SEVAUX
 
@@ -9,25 +9,22 @@ paginate: 5
 enableRobotsTXT: true
 enableEmoji: true
 
-googleAnalytics: "G-C3YDT1E2YB"
-
-taxonomies:
-  category: categories
-  series: series
-  tag: tags
+buildDrafts: false
+buildFuture: false
+buildExpired: false
 
 menu:
   main:
+    - name: Links
+      url: /links
+      weight: 1
+
     - name: Posts
       url: /posts
-      weight: 1
-      
-    - name: About
-      url: /about
       weight: 2
 
     - name: Contact
-      url: /contact
+      url: /contact/contact
       weight: 3
 
 outputs:

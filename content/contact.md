@@ -12,7 +12,7 @@ draft: false
   <script type="text/javascript">var submitted=false;</script>
 
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
-  onload="if(submitted) {window.location='/contact/thankyou';}"></iframe>
+  onload="if(submitted) {window.location='/thankyou';}"></iframe>
 
   <form action="https://docs.google.com/forms/d/e/18IqVKDW2Og3_-jCCzW4SOk2vpa_FHFC_48lrO-UDGOE/formResponse"
   method="post" target="hidden_iframe" onsubmit="submitted=true;">
