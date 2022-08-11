@@ -17,4 +17,4 @@ I use it to note, save, share, etc what I found either on the internet or by mys
 
 I won't repeat myself :wink:, so please, check my [LinkedIn](https://linkedin.com/in/jean-sevaux) profile.
 
-If you want more information, don't be afraid to contact me via the [contact form](/contact/contact)!
+If you want more information, don't be afraid to contact me via the [contact form](/contact)!
