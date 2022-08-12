@@ -38,7 +38,6 @@ outputs:
 
 params:
   # env: production
-  favicon: "favicon.ico"
   ShowShareButtons: true
   ShowReadingTime: true
   ShowPostNavLinks: true    # Adds a Previous / Next post suggestion under a single post
@@ -46,6 +45,9 @@ params:
   ShowRssButtonInSectionTermList: true
   ShowToc: true   # Table of Content
   ShowBreadCrumbs: true # fil d'Ariane
+
+  assets:
+    favicon: "favicon.ico"  # default path is /static
 
 # **************************************************
   profileMode:
