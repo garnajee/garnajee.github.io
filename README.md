@@ -14,8 +14,8 @@ In my case :
 
 ```sh
 # I change these files:
-/theme/PaperMod/assets/css/common/header.css
-/theme/PaperMod/layouts/_default/single.html
+/themes/PaperMod/assets/css/common/header.css
+/themes/PaperMod/layouts/_default/single.html
 # And to override them, I add changed files here:
 /assets/css/common/header.css
 /layouts/_default/single.html
