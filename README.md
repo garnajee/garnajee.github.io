@@ -6,7 +6,20 @@ The live website is available at https://jeans-github.github.io.
 
 ### Note
 
-I made some small changes to the theme. You can find them in the `/layouts/` directory.
+I made some small changes to the theme. 
+
+In order to *override* the actual theme, you juste have to put your changes files in the root of the working folder.
+
+In my case :
+
+```sh
+# I change these files:
+/theme/PaperMod/assets/css/common/header.css
+/theme/PaperMod/layouts/_default/single.html
+# And to override them, I add changed files here:
+/assets/css/common/header.css
+/layouts/_default/single.html
+```
 
 # Build
 
