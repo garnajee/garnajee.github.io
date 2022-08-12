@@ -46,8 +46,8 @@ params:
   ShowToc: true   # Table of Content
   ShowBreadCrumbs: true # fil d'Ariane
 
-assets:
-    favicon: "favicon.ico"  # default path is /static
+  assets:
+    favicon: "/favicon.ico"  # default path is /static
 
 # **************************************************
   profileMode:
