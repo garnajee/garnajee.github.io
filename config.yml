@@ -38,6 +38,7 @@ outputs:
 
 params:
   # env: production
+  author: Jean SEVAUX
   ShowShareButtons: true
   ShowReadingTime: true
   ShowPostNavLinks: true    # Adds a Previous / Next post suggestion under a single post
