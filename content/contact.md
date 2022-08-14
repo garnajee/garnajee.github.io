@@ -18,7 +18,7 @@ draft: false
   method="post" target="hidden_iframe" onsubmit="submitted=true;">
   </form>
 
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLScrKjGosDb4LOIJ9VBXe1JFAz6YITrcjwTgzKK42JQasbn2ew/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true" netlify >
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLScrKjGosDb4LOIJ9VBXe1JFAz6YITrcjwTgzKK42JQasbn2ew/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true">
 
   <label>Full Name*</label>
     <input type="text" placeholder="Full Name*" class="form-input" name="entry.1702893565" required>
