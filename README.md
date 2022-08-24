@@ -10,7 +10,7 @@ The live website is available at https://jeans-github.github.io.
 
 I made some small changes to the theme. 
 
-In order to *override* the actual theme, you juste have to put your changes files in the root of the working folder.
+In order to *override* the actual theme, you juste have to put your changed files in the root of the working folder.
 
 In my case :
 
