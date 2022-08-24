@@ -4,7 +4,7 @@ This is my personal website buil with [Hugo](https://gohugo.io/) and with the [P
 
 The live website is available at https://jeans-github.github.io.
 
-[build check](https://github.com/JeanS-github/JeanS-github.github.io/actions/workflows/gh-pages.yml/badge.svg)
+![build check](https://github.com/JeanS-github/JeanS-github.github.io/actions/workflows/gh-pages.yml/badge.svg)
 
 ### Note
 
