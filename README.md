@@ -2,9 +2,9 @@
 
 This is my personal website buil with [Hugo](https://gohugo.io/) and with the [PaperMod](https://github.com/adityatelange/hugo-PaperMod) theme.
 
-The live website is available at https://jeans-github.github.io.
+The live website is available at https://garnajee.github.io.
 
-![build check](https://github.com/JeanS-github/JeanS-github.github.io/actions/workflows/gh-pages.yml/badge.svg)
+![build check](https://github.com/garnajee/garnajee.github.io/actions/workflows/gh-pages.yml/badge.svg)
 
 ### Note
 
@@ -30,7 +30,7 @@ You first need to [install Hugo](https://gohugo.io/getting-started/quick-start/#
 If you want to build this website for your own purpose:
 
 ```sh
-$ git clone --recurse-submodules https://github.com/JeanS-github/jeans-github.github.io.git
+$ git clone --recurse-submodules https://github.com/garnajee/garnajee.github.io.git
 $ git submodule init
 $ git submodule update
 ```
