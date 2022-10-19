@@ -1,4 +1,4 @@
-baseURL: "https://jeans-github.github.io/"
+baseURL: "https://garnajee.github.io/"
 languageCode: en-us
 title: Jean SEVAUX
 
@@ -81,7 +81,7 @@ params:
     - name: "LinkedIn"
       url: "https://linkedin.com/in/jean-sevaux"
     - name: "Github"
-      url: "https://github.com/JeanS-github"
+      url: "https://github.com/garnajee"
     - name: Rss
       url: "index.xml"
 
