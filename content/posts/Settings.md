@@ -1,9 +1,12 @@
 ---
-title: "Settings"
+title: "My Settings"
 aliases: ["/posts/settings"]
-date: 2022-11-26T12:39:47+00:00
-tags: ["settings","krunker"]
+series: ["Settings"]
+weight: 2
+date: 2022-11-26
+tags: ["settings", "krunker"]
 author: "Garnajee"
+draft: false
 ---
 
 
