@@ -1,5 +1,6 @@
 ---
 title: "Settings"
+aliases: ["/settings"]
 date: 2022-11-26T12:39:47+00:00
 tags: ["settings","krunker"]
 author: "Garnajee"
