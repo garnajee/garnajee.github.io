@@ -57,3 +57,10 @@ Content "/your/path/garnajee.github.io/content/posts/<post-name>.md" created
 
 Now, edit this new page: `$ vim content/posts/<post-name>.md`.
 
+Update submodule: 
+
+```sh
+$ cd themes/PaperMod
+$ git pull
+```
+
