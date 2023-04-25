@@ -1,3 +1,4 @@
+---
 title: "Home Server"
 date: 2023-04-25T10:11:41+02:00
 summary: "A guide to create your perfect home server."
@@ -5,6 +6,7 @@ aliases: ["/posts/home-server","/posts/server","/server"]
 tags: ["home-server","home-lab","server","lab","media","download","docker","docker-compose"]
 author: "Garnajee"
 draft: true
+---
 
 # About
 

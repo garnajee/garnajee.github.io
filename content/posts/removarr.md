@@ -1,3 +1,4 @@
+---
 title: "Removarr"
 date: 2023-04-25T13:27:56+02:00
 summary: "A web app to list and delete files in your download folder but not in your media folder."
@@ -5,6 +6,7 @@ aliases: ["/posts/removarr", "/removarr"]
 tags: ["removarr", "Flask", "Python", "server", "web", "app"]
 author: "Garnajee"
 draft: true
+---
 
 # About
 
