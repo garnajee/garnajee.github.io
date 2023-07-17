@@ -55,4 +55,10 @@
   {{- end }}
 </article>
 
+{{- $posts := (sort .Site.RegularPages ".PublishDate" "desc") -}}
+
+{{- range $post := $posts }}
+  {{- partial "post.html" $post -}}
+{{- end}}
+
 {{- end }}{{/* end main */}}
