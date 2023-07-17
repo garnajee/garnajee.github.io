@@ -5,7 +5,7 @@ summary: "A web app to list and delete files in your download folder but not in 
 aliases: ["/posts/removarr", "/removarr"]
 tags: ["removarr", "Flask", "Python", "server", "web", "app"]
 author: "Garnajee"
-draft: true
+draft: false
 ---
 
 # About

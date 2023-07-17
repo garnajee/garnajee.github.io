@@ -5,7 +5,7 @@ summary: "Development of an automation tool to detect information manipulation i
 aliases: ["/posts/real-time-information-manipulation-detection", "/infomanip"]
 tags: ["infomanip", "computer", "influence", "struggle", "manipulation", "detection", "cybersecurity", "engineering", "data", "analysis"]
 author: "Garnajee"
-draft: true
+draft: false
 ---
 
 # About
