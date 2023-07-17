@@ -1,3 +1,4 @@
+---
 title: "Real-time detection of information manipulation - Computational Influence Struggle (L2I)."
 date: 2023-07-17T15:16:56+02:00
 summary: "Development of an automation tool to detect information manipulation in real time as part of L2I operations - 4th year engineering school project."
@@ -5,6 +6,7 @@ aliases: ["/posts/real-time-information-manipulation-detection", "/infomanip"]
 tags: ["infomanip", "computer", "influence", "struggle", "manipulation", "detection", "cybersecurity", "engineering", "data", "analysis"]
 author: "Garnajee"
 draft: true
+---
 
 # About
 
