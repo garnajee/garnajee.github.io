@@ -85,3 +85,7 @@ params:
     - name: Rss
       url: "index.xml"
 
+# **************************************************
+  fuseOpts:
+    shouldSort: true
+
