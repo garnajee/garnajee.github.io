@@ -3,7 +3,6 @@ title: "Examples HUGO"
 summary: Read Install and Update instructions here
 date: 2021-01-20
 series: ["Examples HUGO"]
-weight: 1
 aliases: ["/posts/examples-hugo"]
 tags: ["examples HUGO"]
 author: "Aditya Telange"

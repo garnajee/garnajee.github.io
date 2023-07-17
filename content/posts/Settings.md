@@ -2,7 +2,6 @@
 title: "My Settings"
 aliases: ["/posts/settings"]
 series: ["Settings"]
-weight: 2
 date: 2022-11-26
 tags: ["settings", "krunker"]
 author: "Garnajee"
