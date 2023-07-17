@@ -58,7 +58,7 @@
 {{- $posts := (sort .Site.RegularPages ".PublishDate" "desc") -}}
 
 {{- range $post := $posts }}
-  {{- partial "post.html" $post -}}
+  {{- partial "edit_post.html" $post -}}
 {{- end}}
 
 {{- end }}{{/* end main */}}
