@@ -1,6 +1,6 @@
 ---
 title: "Contact"
-date: 2022-08-07T16:38:55+02:00
+#date: 2022-08-07T16:38:55+02:00
 ShowReadingTime: false
 ShowPostNavLinks: false
 draft: false
