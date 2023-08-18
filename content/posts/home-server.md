@@ -41,7 +41,7 @@ Synology Server:
   * or you can use the binary: (I use the binary)
 
 ```bash
-$ curl -SL https://github.com/docker/compose/releases/download/v2.17.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+$ curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
 # check version
 $ docker-compose version
 ```
@@ -330,7 +330,7 @@ Add these values:
 
 * "Cache TTL (seconds):" `2100`
 * "Cache max results per indexer:" `1000`
-* "FlareSolverr API URL:" `http://10.10.66.102:8191`    # **if you don't change anything on the docker-compose, that's it**
+* "FlareSolverr API URL:" `http://10.10.66.100:8191`    # **if you don't change anything on the docker-compose, that's it**
 * "FlareSolverr Max Timeout (ms):" `100000`
 
 Leave the rest blank.
