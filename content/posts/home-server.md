@@ -490,6 +490,22 @@ The "*Server Url*" is your Jellyfin URL. If you expose it on internet, it's some
 
 *If you don't have a domain name, Jellyfin will not be able to display images (posters) in the Discord/Teams webhooks.*
 
+#### Global Webhook
+
+This method will allow you to send a webhook to any service/api you want in a very easy way.
+
+This consists of using your own API and create your request in Python (which is more flexible than the Jellyfin Webhook plugin) and send it to the API you want.
+
+To do this you will need to modify as your needs the [JellyHookAPI/jellyhookapi.py](JellyHookAPI/jellyhookapi.py) file.
+
+Then, add the [Handlebars template](webhooks/jellyfin/global-item.handlebars) in Jellyfin > Plugin > Webhook > "Generic Destination".
+
+And finally, build and run the docker image.
+
+All these steps are explained in the [README](JellyHookAPI/#jellyhookapi) of the JellyHookAPI folder.
+
+##### Discord Webhook
+
 To add a **Discord** webhook:
 
 * click on "Add Discord Destination"
@@ -512,14 +528,20 @@ To add a **Discord** webhook:
 
 Then click save.
 
+##### Microsoft Teams Webhook
+
 To add a **Microsoft Teams** webhook:
 
-* clic on "Add a Generic Destination"
+* click on "Add a Generic Destination"
 * check the steps for Discord, it's the same
 * "*Template*":
   1. "*Item Added*": [teams-items.handlebars](https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-items.handlebars)
   2. "*User Locked Out*": [teams-users-locked-out.handlebars](https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users-locked-out.handlebars)
   3. "*User*": [teams-users.handlebars](https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users.handlebars)
+  
+##### Old method WhatsApp Webhook
+
+(***Old method - please refer to [the Global Webhook section](#global-webhook) for the new (and better) method.***)
 
 To add a **WhatsApp** webhook:
 
