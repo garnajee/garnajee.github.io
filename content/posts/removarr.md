@@ -14,7 +14,7 @@ The [source code](https://github.com/garnajee/removarr) is available on github.
 
 This is a web application, created to help you manually delete files present in the (e.g. Transmission `completed/`) download folder but not in the (e.g. Jellyfin) `medias/` folder. If you have separated folders it'll also works.
 
-Take a look at the screenshot of the web-app [here](https://zupimages.net/up/23/15/jhb0.png).
+Take a look at the screenshot of the web-app [here](https://zupimages.net/up/23/37/0wll.png).
 
 ## How it works
 
