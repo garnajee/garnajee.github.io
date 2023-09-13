@@ -167,8 +167,38 @@ $ id username
 * [x] delete empty folder (ignore other files different than .mkv/avi/...)
 * [x] add total size of all files
 * [x] add size of each file in a column
-* [ ] create a checkbox to delete multiples files at once
-* [ ] create a button to delete all files at once
+* [x] create a checkbox to delete multiples files at once
+* [x] create a button to delete all files at once => use the "Select All" button
 * [ ] sort table by alphabetic order and file size
-* [ ] make the app responsive
+* [ ] add an "unwanted" button, hide files to avoid deleting them by mistake
+* [ ] make the app more responsive
+
+## Build
+
+To build this application, follow these steps:
+
+* build the Dockerfile: `$ docker build -t <your_image_name> .`
+* run the image: `$ docker run -p 5000:5000 -v /your/path/completed:/data/completed -v /your/path/medias:/data/medias <your_image_name>`
+
+If you want to use a docker-compose.yml instead of the Dockerfile, then use this example:
+
+```yml
+version: '3.9'
+services:
+  removarr:
+    build: .
+    container_name: removarr
+    restart: always
+    environment:
+      - PUID=1030
+      - PGID=100
+    volumes:
+      - '/your/path/completed/:/data/completed'
+      - '/your/path/medias/:/data/medias'
+    ports:
+      - '127.0.0.1:8012:5000'
+```
+
+* you can now build this docker-compose.yml: `$ docker-compose build`
+* and finally, run: `$ docker-compose up -d`
 
