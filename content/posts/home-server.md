@@ -496,13 +496,13 @@ This method will allow you to send a webhook to any service/api you want in a ve
 
 This consists of using your own API and create your request in Python (which is more flexible than the Jellyfin Webhook plugin) and send it to the API you want.
 
-To do this you will need to modify as your needs the [JellyHookAPI/jellyhookapi.py](https://github.com/garnajee/home-server/tree/master/JellyHookAPI/jellyhookapi.py) file.
+To do this you will need to modify as your needs the [JellyHookAPI/jellyhookapi.py](https://github.com/garnajee/JellyHookAPI/blob/master/jellyhookapi.py) file.
 
 Then, add the [Handlebars template](https://github.com/garnajee/home-server/tree/master/webhooks/jellyfin/global-item.handlebars) in Jellyfin > Plugin > Webhook > "Generic Destination".
 
 And finally, build and run the docker image.
 
-All these steps are explained in the [README](https://github.com/garnajee/home-server/tree/master/JellyHookAPI#jellyhookapi) of the JellyHookAPI folder.
+All these steps are explained in the [JellyHookAPI/README](https://github.com/garnajee/JellyHookAPI/tree/master#jellyhookapi) of the JellyHookAPI folder.
 
 ##### Discord Webhook
 
