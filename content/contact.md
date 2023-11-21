@@ -1,6 +1,6 @@
 ---
 title: "Contact"
-#date: 2022-08-07T16:38:55+02:00
+#date: 2023-11-21T11:03:55+02:00
 ShowReadingTime: false
 ShowPostNavLinks: false
 draft: false
@@ -14,22 +14,18 @@ draft: false
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
   onload="if(submitted) {window.location='/thankyou';}"></iframe>
 
-  <form action="https://docs.google.com/forms/d/e/18IqVKDW2Og3_-jCCzW4SOk2vpa_FHFC_48lrO-UDGOE/formResponse"
-  method="post" target="hidden_iframe" onsubmit="submitted=true;">
-  </form>
-
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLScrKjGosDb4LOIJ9VBXe1JFAz6YITrcjwTgzKK42JQasbn2ew/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true">
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdx6EWgZTyYdV8V1cWGyErtoWdzWVdlhEa6fK3Rn77rBp05Ew/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;"></form>
 
   <label>Full Name*</label>
-    <input type="text" placeholder="Full Name*" class="form-input" name="entry.1702893565" required>
+    <input type="text" placeholder="Full Name*" class="form-input" name="entry.2105212935" required>
   <label>Email*</label>
-    <input type="email" placeholder="Email*" class="form-input" name="entry.1687760395" required>
+    <input type="email" placeholder="Email*" class="form-input" name="entry.1732162515" required>
 
   <label>Subject*</label>
-    <input type="text" placeholder="Subject*" class="form-input" name="entry.677659559" required>
+    <input type="text" placeholder="Subject*" class="form-input" name="entry.1109003079" required>
 
-  <label>Message</label>
-    <textarea rows="5" placeholder="Enter your Message" class="form-input" name="entry.1279725271" ></textarea>
+  <label>Message*</label>
+    <textarea rows="5" placeholder="Enter your Message" class="form-input" name="entry.300831009" ></textarea>
 
   <button type="submit">Send</button>
   </form>
