@@ -1,8 +1,7 @@
 ---
 title: "Contact"
 #date: 2023-11-21T11:03:55+02:00
-ShowReadingTime: false
-ShowPostNavLinks: false
+hidemeta: true
 draft: false
 ---
 
