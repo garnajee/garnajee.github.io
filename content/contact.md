@@ -25,7 +25,7 @@ draft: false
     <input type="text" placeholder="Subject*" class="form-input" name="entry.1109003079" required>
 
   <label>Message*</label>
-    <textarea rows="5" placeholder="Enter your Message" class="form-input" name="entry.300831009" ></textarea>
+    <textarea rows="5" placeholder="Enter your Message" class="form-input" name="entry.300831009" required></textarea>
 
   <button type="submit">Send</button>
   </form>
