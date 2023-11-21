@@ -14,7 +14,7 @@ draft: false
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
   onload="if(submitted) {window.location='/thankyou';}"></iframe>
 
-  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdx6EWgZTyYdV8V1cWGyErtoWdzWVdlhEa6fK3Rn77rBp05Ew/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;"></form>
+  <form action="https://docs.google.com/forms/d/e/1FAIpQLSdx6EWgZTyYdV8V1cWGyErtoWdzWVdlhEa6fK3Rn77rBp05Ew/formResponse" method="post" target="hidden_iframe" onsubmit="submitted=true;">
 
   <label>Full Name*</label>
     <input type="text" placeholder="Full Name*" class="form-input" name="entry.2105212935" required>
