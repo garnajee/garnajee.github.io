@@ -457,7 +457,7 @@ In the setting page:
   * Hostname/IP: put the internal docker ip: `10.10.66.103`.
   * Port: `8096`
   * API key: the one you created just before
-  * then load libraries, submit.
+  * Then load libraries, submit.
 
 Now for every service you're going to add (Sonarr, Radarr, ...) make sure to write the *internal docker ip address and internal port of the application*. The API keys are available in Sonarr/Radarr/... settings tab.
 
