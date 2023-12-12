@@ -40,13 +40,7 @@ Synology Server:
   * if you are on a system that support `apt` packages, you can use the `compose` plugin: `apt install docker-compose-plugin` (it's better for updates) 
     * check version: `$ docker compose version` 
       * note: with the `compose` plugin you don't need the `-` between `docker` and `compose`
-  * or you can use the binary: (I use the binary)
-
-```bash
-$ curl -SL https://github.com/docker/compose/releases/download/v2.20.3/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-# check version
-$ docker-compose version
-```
+  * or you can use the binary (I use it) and run my custom script to download the latest docker-compose version: [available here](https://github.com/garnajee/home-server/blob/master/update-docker-compose.sh)
 
 ## Medias Server
 
