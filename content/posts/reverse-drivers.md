@@ -68,6 +68,18 @@ Microsoft's response to driver vulnerabilities primarily revolves around certifi
 
 Despite concerted research efforts, the field of Windows driver vulnerability mitigation faces significant challenges. Existing tools and methodologies, while valuable, often fall short of providing comprehensive solutions. Automated vulnerability assessment tools, such as `Popkorn` and `Screwed Drivers`, offer insights into potential vulnerabilities but lack the capacity to analyze both Windows Driver Model (WDM) and Windows Driver Framework (WDF) drivers effectively.
 
+Current research efforts in vulnerability assessment of Windows drivers have yielded promising developments, yet they also face inherent limitations that warrant attention and consideration. In this section, we delve into the methodologies employed by recent tools and highlight their strengths and limitations.
+
+**TAU Methodology:**
+
+In October 31st, 2023, an article on the VMWare blog introduced `TAU`, a novel tool developed by Takahiro Haruyama aimed at automating the detection of vulnerabilities in WDM and WDF x64 drivers. `TAU` leverages IDA Pro scripts to conduct comprehensive vulnerability hunts, focusing on the unique characteristics of WDF drivers. Despite being open-source, `TAU`'s accessibility is restricted due to its dependency on IDA Pro. However, Haruyama's insights into `TAU`'s functionality have unveiled a distinct methodology for vulnerability hunting in WDF drivers, tailored to address their specific nuances. `TAU` also aims to address the limitations of existing tools like `ScrewedDrivers` by Eclypsium, which primarily target WDM drivers. By filling potential gaps in `ScrewedDrivers'` capabilities, `TAU` represents a significant advancement in vulnerability assessment methodologies for Windows drivers.
+
+**ScrewedDrivers Methodology:**
+
+Eclypsium's `ScrewedDrivers` tool has been instrumental in identifying vulnerabilities in Windows drivers, particularly within the WDM framework. However, its applicability to WDF drivers is limited, as it primarily relies on symbolic execution with Angr, which may lead to "path explosions, false negatives, and other unknown errors." While `ScrewedDrivers` has contributed significantly to driver security, its effectiveness in analyzing WDF drivers remains constrained by the complexities inherent in the framework.
+
+Despite the advancements represented by tools like `TAU` and `ScrewedDrivers`, achieving full automation in vulnerability assessment remains a formidable challenge. Even with `TAU`'s introduction, manual verification remains indispensable due to the intricate nature of WDF drivers and the potential for overlooked vulnerabilities. As the field continues to evolve, researchers and developers must navigate these limitations while striving to enhance the efficacy and reliability of vulnerability assessment methodologies for Windows drivers.
+
 ### 3. Strategies for Vulnerability Assessment and Mitigation
 
 #### 3.1. Standards and Challenges in Driver Development
@@ -156,3 +168,20 @@ Future improvements in vulnerability research automation should prioritize expan
 # Conclusion
 
 In conclusion, addressing Windows driver vulnerabilities demands a multifaceted approach encompassing stringent standards, advanced research methodologies, and continuous innovation in vulnerability assessment tools. By understanding the nuances of driver security threats and leveraging cutting-edge technologies, the cybersecurity community can mitigate risks and fortify systems against emerging threats effectively.
+
+---
+
+We hope that this article has provided valuable insights into the intricate landscape of Windows driver security and the methodologies employed in vulnerability research. Should you wish to delve deeper into our research findings or have further inquiries, we encourage you to explore our full research article available to download below.
+
+[click here to downlad research paper](/files/research-paper-reverse-windows-drivers.pdf)
+
+> For additional information or inquiries, please do not hesitate to reach out to us via the contact form available [here](https://garnajee.github.io/contact). We welcome your feedback, questions, and collaboration opportunities.
+
+Thank you for your interest and support.
+
+### Acknowledgments
+
+We would like to express our sincere gratitude to Mr. Guillet, our project supervisor, for his invaluable guidance and support throughout the duration of this project. His expertise, encouragement, and unwavering commitment have been instrumental in shaping our research journey.
+
+We extend our heartfelt appreciation to the experts at DGA-MI for their insightful contributions, diligent guidance, and unwavering support throughout the course of our research. Their expertise, feedback, and encouragement have been invaluable assets that have enriched our project and propelled us forward.
+
