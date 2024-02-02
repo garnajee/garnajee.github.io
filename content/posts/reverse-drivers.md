@@ -28,7 +28,7 @@ They interact closely with the operating system kernel and directly access hardw
 Due to their direct interaction with system components, WDM drivers require precise memory management and error handling to prevent system crashes and vulnerabilities.
 The development of WDM drivers necessitates a deep understanding of system architecture and kernel programming, making them prone to errors and vulnerabilities if not implemented correctly.
 
-In the architecture of WDM drivers, the DriverEntry function serves as the primary initialization routine, responsible for setting up the driver environment and initializing driver-specific data structures. WDM drivers interact with the operating system kernel through dispatch routines linked to various IRP (I/O Request Packet) codes, enabling communication and interaction with hardware devices.
+In the architecture of WDM drivers, the `DriverEntry` function serves as the primary initialization routine, responsible for setting up the driver environment and initializing driver-specific data structures. WDM drivers interact with the operating system kernel through dispatch routines linked to various IRP (I/O Request Packet) codes, enabling communication and interaction with hardware devices.
 
 WDM drivers rely on pointers to system objects and structures, often referenced directly within the driver code. The model is implicit, with roles (physical, functional, or filter) determined implicitly by the driver's behavior. Context management in WDM drivers involves configuring context zones within driver-specific data structures, where synchronization and concurrency control require manual implementation using locks and synchronization primitives.
 
@@ -39,7 +39,7 @@ WDF drivers interact with the system through framework-provided APIs, reducing t
 By abstracting complex interactions with the system, WDF drivers promote safer and more reliable driver development practices.
 WDF drivers benefit from built-in error handling and resource management capabilities, minimizing the risk of common driver-related vulnerabilities.
 
-In contrast to WDM, WDF incorporates the driver's entry point within the framework itself, simplifying initialization through event callback functions such as EvtDriverDeviceAdd for Plug and Play scenarios. Dispatch routines in WDF drivers are managed by the framework, reducing the burden on developers and ensuring consistent behavior across different driver implementations.
+In contrast to WDM, WDF incorporates the driver's entry point within the framework itself, simplifying initialization through event callback functions such as `EvtDriverDeviceAdd` for Plug and Play scenarios. Dispatch routines in WDF drivers are managed by the framework, reducing the burden on developers and ensuring consistent behavior across different driver implementations.
 
 The object-oriented model in WDF introduces an opaque structure, where drivers interact with objects through handles provided by the framework. Object roles (physical, functional, or filter) are explicit and defined through event callback functions corresponding to each role. WDF also offers built-in support for context management, with configurable context zones for storing driver-specific data associated with each object instance. Synchronization is integrated into the framework, reducing the need for explicit locking mechanisms and minimizing the risk of synchronization-related issues.
 
@@ -58,11 +58,11 @@ The gravest danger posed by BYOVD lies in its exploitation of signed certificate
 
 #### 2.1. Evaluation of Microsoft's Response
 
-Microsoft's response to driver vulnerabilities primarily revolves around certification programs such as the Windows Hardware Quality Labs (WHQL) and Extended Validation (EV). While these programs aim to ensure driver compatibility and security, their effectiveness remains limited. Recent attacks have demonstrated that certified drivers may still harbor vulnerabilities, as Microsoft's certification process does not comprehensively scrutinize driver code for potential flaws.
+Microsoft's response to driver vulnerabilities primarily revolves around certification programs such as the *Windows Hardware Quality Labs* (WHQL) and *Extended Validation* (EV). While these programs aim to ensure driver compatibility and security, their effectiveness remains limited. Recent attacks have demonstrated that certified drivers may still harbor vulnerabilities, as Microsoft's certification process does not comprehensively scrutinize driver code for potential flaws.
 
 #### 2.2. Current Research Efforts and Limitations
 
-Despite concerted research efforts, the field of Windows driver vulnerability mitigation faces significant challenges. Existing tools and methodologies, while valuable, often fall short of providing comprehensive solutions. Automated vulnerability assessment tools, such as Popkorn and Screwed Drivers, offer insights into potential vulnerabilities but lack the capacity to analyze both Windows Driver Model (WDM) and Windows Driver Framework (WDF) drivers effectively.
+Despite concerted research efforts, the field of Windows driver vulnerability mitigation faces significant challenges. Existing tools and methodologies, while valuable, often fall short of providing comprehensive solutions. Automated vulnerability assessment tools, such as `Popkorn` and `Screwed Drivers`, offer insights into potential vulnerabilities but lack the capacity to analyze both Windows Driver Model (WDM) and Windows Driver Framework (WDF) drivers effectively.
 
 ### 3. Strategies for Vulnerability Assessment and Mitigation
 
@@ -72,13 +72,13 @@ The establishment of standards, such as WHQL and EV, represents a crucial step i
 
 #### 3.2. Assessing Vulnerability Assessment Methodologies
 
-Current vulnerability assessment methodologies, including TAU and Popkorn, offer valuable insights into driver vulnerabilities. However, their effectiveness varies, and improvements are necessary to enhance their scope and accuracy. Future efforts should focus on refining analysis techniques and expanding the toolsets to encompass a broader range of drivers, including WDF drivers.
+Current vulnerability assessment methodologies, including `TAU` and `Popkorn`, offer valuable insights into driver vulnerabilities. However, their effectiveness varies, and improvements are necessary to enhance their scope and accuracy. Future efforts should focus on refining analysis techniques and expanding the toolsets to encompass a broader range of drivers, including WDF drivers.
 
 ### 4. Advancements in Vulnerability Research Automation
 
 #### 4.1. Current Landscape and Research Gaps
 
-Despite recent advancements, the vulnerability research landscape remains fragmented, with notable gaps in analyzing WDF drivers effectively. Open-source projects like Popkorn have shown promise in identifying vulnerabilities but require enhancements to address the complexities of WDF drivers comprehensively. Here is a summary of the state of the art projects:
+Despite recent advancements, the vulnerability research landscape remains fragmented, with notable gaps in analyzing WDF drivers effectively. Open-source projects like `Popkorn` have shown promise in identifying vulnerabilities but require enhancements to address the complexities of WDF drivers comprehensively. Here is a summary of the state of the art projects:
 
 |                     | **Popkorn** |      **Screwed Drivers**     |  **TAU**  |
 |:-------------------:|:-----------:|:----------------------------:|:---------:|
@@ -90,7 +90,7 @@ Despite recent advancements, the vulnerability research landscape remains fragme
 
 #### 4.2. Advancements in the Popkorn Tool
 
-Ongoing efforts to enhance tools like Popkorn involve replicating proof-of-concept (POC) exploits, improving vulnerability detection mechanisms, and expanding the dataset to encompass a broader range of driver types. These advancements aim to bolster the tool's efficacy in identifying and mitigating driver vulnerabilities across diverse Windows environments.
+Ongoing efforts to enhance tools like `Popkorn` involve replicating proof-of-concept (POC) exploits, improving vulnerability detection mechanisms, and expanding the dataset to encompass a broader range of driver types. These advancements aim to bolster the tool's efficacy in identifying and mitigating driver vulnerabilities across diverse Windows environments.
 
 #### 4.3. Understanding Limitations and Challenges
 
