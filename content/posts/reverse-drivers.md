@@ -48,23 +48,23 @@ In contrast to WDM, WDF incorporates the driver's entry point within the framewo
 The object-oriented model in WDF introduces an opaque structure, where drivers interact with objects through handles provided by the framework. Object roles (physical, functional, or filter) are explicit and defined through event callback functions corresponding to each role. WDF also offers built-in support for context management, with configurable context zones for storing driver-specific data associated with each object instance. Synchronization is integrated into the framework, reducing the need for explicit locking mechanisms and minimizing the risk of synchronization-related issues.
 
 
-### 1.2. Exploiting Vulnerable Drivers: The BYOVD Attack
+## 1.2. Exploiting Vulnerable Drivers: The BYOVD Attack
 
-#### 1.2.1. Understanding the BYOVD Threat
+### 1.2.1. Understanding the BYOVD Threat
 
 The Bring Your Own Vulnerable Driver (BYOVD) attack represents a sophisticated method of exploiting vulnerable drivers within the Windows operating system. In this attack, perpetrators surreptitiously introduce legitimate, yet compromised, drivers onto target systems. Once deployed, these drivers operate at the highest privilege level, known as ring 0, within the system's kernel. What makes BYOVD particularly insidious is its ability to evade traditional security measures. Legitimate drivers, even when compromised, are not inherently flagged by conventional security solutions, allowing attackers to operate undetected.
 
-#### 1.2.2. The Significance of BYOVD Vulnerabilities
+### 1.2.2. The Significance of BYOVD Vulnerabilities
 
 The gravest danger posed by BYOVD lies in its exploitation of signed certificates. Historically, signed certificates have served as a hallmark of trust and security within the Windows ecosystem. However, recent attacks have underscored their fallibility. Despite being certified, drivers can harbor critical vulnerabilities, allowing attackers to subvert system defenses. The exploitation of these vulnerabilities enables attackers to execute malicious code with elevated privileges, posing severe risks to system integrity and data confidentiality.
 
-### 2. Addressing Windows Driver Vulnerabilities
+# 2. Addressing Windows Driver Vulnerabilities
 
-#### 2.1. Evaluation of Microsoft's Response
+## 2.1. Evaluation of Microsoft's Response
 
 Microsoft's response to driver vulnerabilities primarily revolves around certification programs such as the *Windows Hardware Quality Labs* (WHQL) and *Extended Validation* (EV). While these programs aim to ensure driver compatibility and security, their effectiveness remains limited. Recent attacks have demonstrated that certified drivers may still harbor vulnerabilities, as Microsoft's certification process does not comprehensively scrutinize driver code for potential flaws.
 
-#### 2.2. Current Research Efforts and Limitations
+## 2.2. Current Research Efforts and Limitations
 
 Despite concerted research efforts, the field of Windows driver vulnerability mitigation faces significant challenges. Existing tools and methodologies, while valuable, often fall short of providing comprehensive solutions. Automated vulnerability assessment tools, such as `Popkorn` and `Screwed Drivers`, offer insights into potential vulnerabilities but lack the capacity to analyze both Windows Driver Model (WDM) and Windows Driver Framework (WDF) drivers effectively.
 
@@ -80,19 +80,19 @@ Eclypsium's `ScrewedDrivers` tool has been instrumental in identifying vulnerabi
 
 Despite the advancements represented by tools like `TAU` and `ScrewedDrivers`, achieving full automation in vulnerability assessment remains a formidable challenge. Even with `TAU`'s introduction, manual verification remains indispensable due to the intricate nature of WDF drivers and the potential for overlooked vulnerabilities. As the field continues to evolve, researchers and developers must navigate these limitations while striving to enhance the efficacy and reliability of vulnerability assessment methodologies for Windows drivers.
 
-### 3. Strategies for Vulnerability Assessment and Mitigation
+# 3. Strategies for Vulnerability Assessment and Mitigation
 
-#### 3.1. Standards and Challenges in Driver Development
+## 3.1. Standards and Challenges in Driver Development
 
 The establishment of standards, such as WHQL and EV, represents a crucial step in mitigating driver vulnerabilities. However, these standards alone are insufficient in addressing the evolving threat landscape. Vulnerabilities persist even in certified drivers, highlighting the need for more rigorous code verification processes and comprehensive security measures.
 
-#### 3.2. Assessing Vulnerability Assessment Methodologies
+## 3.2. Assessing Vulnerability Assessment Methodologies
 
 Current vulnerability assessment methodologies, including `TAU` and `Popkorn`, offer valuable insights into driver vulnerabilities. However, their effectiveness varies, and improvements are necessary to enhance their scope and accuracy. Future efforts should focus on refining analysis techniques and expanding the toolsets to encompass a broader range of drivers, including WDF drivers.
 
-### 4. Advancements in Vulnerability Research Automation
+# 4. Advancements in Vulnerability Research Automation
 
-#### 4.1. Current Landscape and Research Gaps
+## 4.1. Current Landscape and Research Gaps
 
 Despite recent advancements, the vulnerability research landscape remains fragmented, with notable gaps in analyzing WDF drivers effectively. Open-source projects like `Popkorn` have shown promise in identifying vulnerabilities but require enhancements to address the complexities of WDF drivers comprehensively. Here is a summary of the state of the art projects:
 
@@ -104,15 +104,11 @@ Despite recent advancements, the vulnerability research landscape remains fragme
 | **Frameworks used** |    `Angr`   | `Angr`, `Radare2`, `objdump` | `IDA Pro` |
 | **Fully Automated** |      ✅      |               ❌              |     ❌     |
 
-#### 4.2. Advancements in the Popkorn Tool
+## 4.2. Advancements in the Popkorn Tool
 
-Ongoing efforts to enhance tools like `Popkorn` involve replicating proof-of-concept (POC) exploits, improving vulnerability detection mechanisms, and expanding the dataset to encompass a broader range of driver types. These advancements aim to bolster the tool's efficacy in identifying and mitigating driver vulnerabilities across diverse Windows environments.
+Since its inception, the `Popkorn` tool has undergone significant enhancements and validations to ensure its reliability and effectiveness in identifying vulnerabilities within Windows drivers. This section highlights the key advancements made to the `Popkorn` tool, including exact reproduction of results, environment updates, and the utilization of a new dataset.
 
-### 4.2. Advancements in the Popkorn Tool
-
-Since its inception, the Popkorn tool has undergone significant enhancements and validations to ensure its reliability and effectiveness in identifying vulnerabilities within Windows drivers. This section highlights the key advancements made to the Popkorn tool, including exact reproduction of results, environment updates, and the utilization of a new dataset.
-
-#### 4.2.1. Exact Reproduction of Results
+### 4.2.1. Exact Reproduction of Results
 
 The initial phase of the project focused on replicating the results presented in the research paper, serving as a benchmark to validate the tool's functionality. The Popkorn tool and dataset were retrieved from the developers' GitHub repository, facilitating an in-depth analysis of its capabilities. The reproduction yielded the following results:
 
@@ -124,7 +120,7 @@ The initial phase of the project focused on replicating the results presented in
 
 While the results deviated slightly from the initial expectations, with the number of drivers and unique bugs differing marginally, the tool demonstrated consistent performance across both tests. The discrepancies in results underscored the importance of meticulous validation and testing to ensure the accuracy and reliability of the tool.
 
-#### 4.2.2. Test Environment Update
+### 4.2.2. Test Environment Update
 
 In response to the evolving technological landscape, the test environment underwent comprehensive updates to maintain compatibility and functionality with the latest software versions. The technical updates included:
 
@@ -142,7 +138,7 @@ Following the environment updates, the Popkorn tool was subjected to a new test 
 
 The alignment of results between the original and updated tests underscored the robustness and adaptability of the Popkorn tool to evolving software environments.
 
-#### 4.2.3. Creation of a New Dataset
+### 4.2.3. Creation of a New Dataset
 
 As part of the ongoing enhancements, a new dataset comprising Windows Driver Framework (WDF) drivers was curated to expand the scope of analysis and address potential blind spots. The dataset collection process involved gathering drivers from the team's computer, focusing on drivers located in `C://Windows/System32/drivers`. The analysis of the new dataset yielded the following insights:
 
@@ -157,11 +153,11 @@ The analysis revealed that the majority of drivers within the dataset were deeme
 
 The advancements in the Popkorn tool, including exact reproduction of results, environment updates, and utilization of a new dataset, signify a significant stride towards enhancing the efficacy and reliability of vulnerability assessment in Windows drivers. These enhancements pave the way for more robust cybersecurity measures, mitigating potential threats and safeguarding critical systems against evolving vulnerabilities.
 
-#### 4.3. Understanding Limitations and Challenges
+## 4.3. Understanding Limitations and Challenges
 
 Despite notable advancements, automated vulnerability assessment tools face inherent limitations. Challenges include scope limitations, false negatives, and the complexity of detecting vulnerabilities within WDF drivers. Addressing these challenges requires a concerted effort to refine analysis techniques and develop more robust mitigation strategies.
 
-#### 4.4. Proposing Future Improvements
+## 4.4. Proposing Future Improvements
 
 Future improvements in vulnerability research automation should prioritize expanding the scope of analysis to include WDF drivers, enhancing detection capabilities, and refining analysis methodologies. Additionally, efforts to incorporate advanced techniques, such as identifying potential BYOVD attacks, are essential for safeguarding against emerging threats effectively.
 
