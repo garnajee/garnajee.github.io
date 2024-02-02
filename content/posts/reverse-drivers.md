@@ -1,6 +1,6 @@
 ---
 title: "Exploring Windows Driver Vulnerabilities: The Reverse Engineering Approach"
-date: 2024-02-02T14:20:56+010
+date: 2024-02-02T14:20:56+02:00
 summary: "Unraveling Windows driver security through reverse engineering"
 aliases: ["/posts/reverse-drivers","/posts/windows-driver-security","/posts/driver-vulnerability-analysis"]
 tags: ["reverse", "reverse engineering", "windows", "drivers", "cybersecurity", "vulnerability", "kernel"]
