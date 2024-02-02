@@ -6,7 +6,7 @@ aliases: ["/posts/reverse-drivers","/posts/windows-driver-security","/posts/driv
 tags: ["reverse", "reverse engineering", "windows", "drivers", "cybersecurity", "vulnerability", "kernel"]
 author: "Garnajee"
 ShowWordCount: true
-draft: true
+draft: false
 ---
 
 **Abstract:**
