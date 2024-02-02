@@ -9,6 +9,8 @@ ShowWordCount: true
 draft: false
 ---
 
+*Jean SEVAUX (author) ; Erwan FONDIN ; XXXX XXXX ; XXXX XXXX*
+
 **Abstract:**
 
 This project, conducted as part of the final year of an engineering degree in Cyberdefense at ENSIBS, delves into the intricate realm of Windows driver security. It's focused on their critical analysis and explores strategies for their assessment and mitigation. Through rigorous research and practical exploration, the project aims to contribute to the advancement of cybersecurity practices, equipping future professionals with essential insights and methodologies to safeguard against evolving threats within the Windows operating environment.
