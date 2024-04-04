@@ -6,9 +6,8 @@ The live website is available at https://garnajee.github.io.
 
 ![build check](https://github.com/garnajee/garnajee.github.io/actions/workflows/gh-pages.yml/badge.svg)
 
-### Note
-
-I made some small changes to the theme. 
+> [!NOTE]
+> I made some small changes to the theme. 
 
 In order to *override* the actual theme, you just have to put your changed files in the root of the working folder.
 
