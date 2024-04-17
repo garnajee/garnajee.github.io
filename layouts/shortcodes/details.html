@@ -1,0 +1,21 @@
+{{- $state := "" -}}
+{{- $id := "" -}}
+{{- $title := "" -}}
+{{- $content := "" -}}
+
+{{- if eq (len .Params) 2 -}}
+    {{- $id = index .Params 0 -}}
+    {{- $title = index .Params 1 -}}
+    {{- $content = .Inner -}}
+{{- else -}}
+    {{- $state = index .Params 0 -}}
+    {{- $id = index .Params 1 -}}
+    {{- $title = index .Params 2 -}}
+    {{- $content = .Inner -}}
+{{- end -}}
+
+<details {{ $state }}>
+  <summary id="{{ $id }}">{{ $title }}</summary>
+  {{- $content }}
+</details>
+
