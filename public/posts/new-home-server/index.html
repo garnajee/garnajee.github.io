@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Home Server | Jean SEVAUX</title>
+<meta name="keywords" content="home-server, home-lab, server, lab, media, download, docker, docker-compose">
+<meta name="description" content="A guide to create your perfect home server.">
+<meta name="author" content="Garnajee">
+<link rel="canonical" href="http://localhost:1313/posts/new-home-server/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.662ca6d01c99ebc221a6b9b838f8c70a6ae4e19a696f783c4e7ca56beefc1d44.css" integrity="sha256-Ziym0ByZ68Ihprm4OPjHCmrk4Zppb3g8Tnyla&#43;78HUQ=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="http://localhost:1313/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/new-home-server/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --hljs-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/" accesskey="h" title="Jean SEVAUX (Alt + H)">Jean SEVAUX</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+                <ul class="lang-switch"><li>|</li>
+                </ul>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/posts" title="Posts">
+                    <span>Posts</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/about" title="About">
+                    <span>About</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/contact" title="Contact">
+                    <span>Contact</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">All posts</a></div>
+    <h1 class="post-title">
+      Home Server
+    </h1>
+    <div class="post-meta"><span title='2023-04-25 10:11:41 +0200 CEST'>April 25, 2023</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Garnajee
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#about" aria-label="About">About</a><ul>
+                        
+                <li>
+                    <a href="#requirements" aria-label="Requirements">Requirements</a></li>
+                <li>
+                    <a href="#medias-server" aria-label="Medias Server">Medias Server</a><ul>
+                        
+                <li>
+                    <a href="#whats-inside" aria-label="What&amp;rsquo;s inside">What&rsquo;s inside</a></li>
+                <li>
+                    <a href="#installation" aria-label="Installation">Installation</a><ul>
+                        
+                <li>
+                    <a href="#modify-env" aria-label="Modify .env">Modify <code>.env</code></a></li>
+                <li>
+                    <a href="#create-a-docker-network" aria-label="Create a docker network">Create a docker network</a></li></ul>
+                </li>
+                <li>
+                    <a href="#run" aria-label="Run!">Run!</a></li>
+                <li>
+                    <a href="#check-vpn-connection" aria-label="Check VPN connection">Check VPN connection</a></li>
+                <li>
+                    <a href="#update-dockers-images" aria-label="Update docker&amp;rsquo;s images">Update docker&rsquo;s images</a><ul>
+                        
+                <li>
+                    <a href="#update-one-specific-image" aria-label="Update one specific image">Update one specific image</a></li>
+                <li>
+                    <a href="#update-all-images" aria-label="Update all images">Update all images</a></li></ul>
+                </li>
+                <li>
+                    <a href="#access-services" aria-label="Access services">Access services</a></li></ul>
+                </li>
+                <li>
+                    <a href="#reverse-proxy" aria-label="Reverse Proxy">Reverse Proxy</a><ul>
+                        
+                <li>
+                    <a href="#whats-inside-1" aria-label="What&amp;rsquo;s inside">What&rsquo;s inside</a></li>
+                <li>
+                    <a href="#installation-1" aria-label="Installation">Installation</a></li>
+                <li>
+                    <a href="#run-1" aria-label="Run">Run</a></li>
+                <li>
+                    <a href="#get-a-domain-name--ssl-certificate" aria-label="Get a domain name &amp;amp; SSL certificate">Get a domain name &amp; SSL certificate</a></li></ul>
+                </li>
+                <li>
+                    <a href="#setup-all-the-services" aria-label="Setup all the services">Setup all the services</a><ul>
+                        
+                <li>
+                    <a href="#transmission-openvpn" aria-label="Transmission-openvpn">Transmission-openvpn</a></li>
+                <li>
+                    <a href="#radarr--sonarr" aria-label="Radarr &amp;amp; Sonarr">Radarr &amp; Sonarr</a><ul>
+                        
+                <li>
+                    <a href="#radarrsonarr-settings" aria-label="Radarr/Sonarr Settings">Radarr/Sonarr Settings</a></li></ul>
+                </li>
+                <li>
+                    <a href="#prowlarr" aria-label="Prowlarr">Prowlarr</a></li>
+                <li>
+                    <a href="#jellyfin" aria-label="Jellyfin">Jellyfin</a></li>
+                <li>
+                    <a href="#jellyseerr" aria-label="Jellyseerr">Jellyseerr</a></li></ul>
+                </li>
+                <li>
+                    <a href="#bonus" aria-label="Bonus">Bonus</a><ul>
+                        
+                <li>
+                    <a href="#webhooks" aria-label="Webhooks">Webhooks</a><ul>
+                        <ul>
+                        
+                <li>
+                    <a href="#" aria-label="Steps:">Steps:</a></li></ul>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#fake-ratio" aria-label="Fake Ratio">Fake Ratio</a></li></ul>
+                </li></ul>
+                </li>
+                <li>
+                    <a href="#license" aria-label="License">License</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content">
+<style type="text/css">
+    .notice {
+        --root-color: #1f1f1f;
+        --title-color: #1e1e1e;
+        --warning-title: #c33;
+        --warning-content: #fee;
+        --info-title: #fb7;
+        --info-content: #fec;
+        --note-title: #6be;
+        --note-content: #e7f2fa;
+        --tip-title: #5a5;
+        --tip-content: #efe
+    }
+
+    .notice {
+        padding: 18px;
+        line-height: 24px;
+        margin-bottom: 24px;
+        border-radius: 4px;
+        color: var(--root-color);
+        background: var(--root-background)
+    }
+
+    .notice p:last-child {
+        margin-bottom: 0
+    }
+
+    .notice-title {
+        margin: -18px -18px 12px;
+        padding: 4px 18px;
+        border-radius: 4px 4px 0 0;
+        font-weight: 700;
+        color: var(--title-color);
+        background: var(--title-background)
+    }
+
+    .notice.warning .notice-title {
+        background: var(--warning-title)
+    }
+
+    .notice.warning {
+        background: var(--warning-content)
+    }
+
+    .notice.info .notice-title {
+        background: var(--info-title)
+    }
+
+    .notice.info {
+        background: var(--info-content)
+    }
+
+    .notice.note .notice-title {
+        background: var(--note-title)
+    }
+
+    .notice.note {
+        background: var(--note-content)
+    }
+
+    .notice.tip .notice-title {
+        background: var(--tip-title)
+    }
+
+    .notice.tip {
+        background: var(--tip-content)
+    }
+
+    .icon-notice {
+        display: inline-flex;
+        align-self: center;
+        margin-right: 8px
+    }
+
+    .icon-notice img,
+    .icon-notice svg {
+        height: 1em;
+        width: 1em;
+        fill: currentColor
+    }
+
+    .icon-notice img,
+    .icon-notice.baseline svg {
+        top: .125em;
+        position: relative
+    }
+</style><div class="notice warning" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
+  <path d="M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z"/>
+</svg>
+
+        </span>warning</p><blockquote>
+<p><strong>Disclaimer:</strong> <em>The author and contributors do not claim ownership of any services listed or used in this repository and are not legally responsible for any improper or illegal use. It is provided for educational purposes only. The repository does not endorse piracy or copyright infringement. Creating a media platform based on torrents may involve downloading copyrighted content, which, without proper authorization, may be illegal in many jurisdictions. All rights go to the owners of the software used.</em></p>
+</blockquote></div>
+
+
+<h1 id="about">About<a hidden class="anchor" aria-hidden="true" href="#about">#</a></h1>
+<p>In this very complete guide (available <a href="https://github.com/garnajee/home-server/">here on github</a>), you&rsquo;ll be able to install from scratch a perfect home-server for a full media donwload and stream automation</p>
+<p>This is my perfect docker-compose for my streaming server.</p>
+<p>You&rsquo;ll find two 2 docker-compose, one to create the streaming services and the other one to access them through a reverse proxy.</p>
+
+<div class="notice note" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 128 300 300">
+  <path d="M150 128c82.813 0 150 67.188 150 150 0 82.813-67.188 150-150 150C67.187 428 0 360.812 0 278c0-82.813 67.188-150 150-150Zm25 243.555v-37.11c0-3.515-2.734-6.445-6.055-6.445h-37.5c-3.515 0-6.445 2.93-6.445 6.445v37.11c0 3.515 2.93 6.445 6.445 6.445h37.5c3.32 0 6.055-2.93 6.055-6.445Zm-.39-67.188 3.515-121.289c0-1.367-.586-2.734-1.953-3.516-1.172-.976-2.93-1.562-4.688-1.562h-42.968c-1.758 0-3.516.586-4.688 1.563-1.367.78-1.953 2.148-1.953 3.515l3.32 121.29c0 2.734 2.93 4.882 6.64 4.882h36.134c3.515 0 6.445-2.148 6.64-4.883Z"/>
+</svg>
+
+        </span>note</p><blockquote>
+<p>I&rsquo;ve also created a <a href="https://github.com/garnajee/home-server/blob/master/chill-extra"><code>chill-extra</code></a> folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the <a href="https://github.com/garnajee/removarr">removarr</a> docker and other scripts.</p>
+</blockquote></div>
+
+
+
+<div class="notice info" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="92 59.5 300 300">
+  <path d="M292 303.25V272c0-3.516-2.734-6.25-6.25-6.25H267v-100c0-3.516-2.734-6.25-6.25-6.25h-62.5c-3.516 0-6.25 2.734-6.25 6.25V197c0 3.516 2.734 6.25 6.25 6.25H217v62.5h-18.75c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h87.5c3.516 0 6.25-2.734 6.25-6.25Zm-25-175V97c0-3.516-2.734-6.25-6.25-6.25h-37.5c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h37.5c3.516 0 6.25-2.734 6.25-6.25Zm125 81.25c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span>info</p><blockquote>
+<p>The only thing to modify is the <code>.env</code> file to suits your setup.</p>
+</blockquote></div>
+
+
+<p>Here, we are going to install everything under <code>/opt/chill/</code> (full streaming automation) and <code>/opt/docker/</code> (reverse proxy).</p>
+<p>To install everything, just follow this Readme in this order.</p>
+<h2 id="requirements">Requirements<a hidden class="anchor" aria-hidden="true" href="#requirements">#</a></h2>
+<ul>
+<li><a href="https://docs.docker.com/engine/install/">docker</a></li>
+<li><a href="https://docs.docker.com/compose/install/">docker-compose</a></li>
+<li>a server maybe? I deployed these docker-compose on 2 servers: a Synology DS923+ and a custom server</li>
+<li>create docker <a href="https://docs.docker.com/engine/install/linux-postinstall/">user</a></li>
+</ul>
+<p>Synology Server:</p>
+<ul>
+<li>
+<p>Download the Docker App available on Synology Package Center</p>
+</li>
+<li>
+<p>Create a docker <a href="https://trash-guides.info/Hardlinks/How-to-setup-for/Synology/#create-a-user">user</a></p>
+<ul>
+<li>once it&rsquo;s done, connect on SSH and type <code>id &lt;username&gt;</code> and write down the <code>uid</code> and <code>gid</code> respectively <code>PUID</code> and <code>PGID</code> for the <a href=".env-example"><code>.env</code></a>.</li>
+</ul>
+</li>
+<li>
+<p>Connect on SSH and download <code>docker-compose</code> <a href="https://docs.docker.com/compose/install/other/">latest command version</a>:</p>
+<ul>
+<li>or use my custom script to <a href="https://github.com/garnajee/home-server/blob/master/chill-extra/update-docker-compose.sh">download the latest docker-compose release</a></li>
+</ul>
+</li>
+<li>
+<p>check version: <code>$ docker-compose version</code></p>
+</li>
+</ul>
+<h2 id="medias-server">Medias Server<a hidden class="anchor" aria-hidden="true" href="#medias-server">#</a></h2>
+<h3 id="whats-inside">What&rsquo;s inside<a hidden class="anchor" aria-hidden="true" href="#whats-inside">#</a></h3>
+<p>This docker-compose contains:</p>
+<ul>
+<li><a href="https://github.com/haugene/docker-transmission-openvpn">Transmission-openvpn</a></li>
+<li><a href="https://github.com/Prowlarr/Prowlarr">Prowlarr</a></li>
+<li><a href="https://github.com/FlareSolverr/FlareSolverr">FlareSolverr</a></li>
+<li><a href="https://github.com/jellyfin/jellyfin">Jellyfin</a></li>
+<li><a href="https://github.com/Fallenbagel/jellyseerr">Jellyseerr</a></li>
+<li><a href="https://github.com/Radarr/Radarr">Radarr</a></li>
+<li><a href="https://github.com/Sonarr/Sonarr">Sonarr</a></li>
+</ul>
+<h3 id="installation">Installation<a hidden class="anchor" aria-hidden="true" href="#installation">#</a></h3>
+<ul>
+<li>Delete previous installation <strong>be careful</strong></li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ rm -rf /opt/chill
+</span></span></code></pre></div><ul>
+<li>Create the structure for every services</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p /opt/chill/<span style="color:#f92672">{</span>transovpn/<span style="color:#f92672">{</span>config<span style="color:#f92672">}</span>,prowlarr/config,jellyfin/config,jellyseerr/config,radarr/config,sonarr/config,storage/downloads/<span style="color:#f92672">{</span>completed,incomplete,watch,medias/<span style="color:#f92672">{</span>movies,series<span style="color:#f92672">}}}</span>
+</span></span></code></pre></div><p>Here is what it&rsquo;s going to create:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>opt
+</span></span><span style="display:flex;"><span>└── chill
+</span></span><span style="display:flex;"><span>    ├── jellyfin
+</span></span><span style="display:flex;"><span>    │   └── config
+</span></span><span style="display:flex;"><span>    ├── jellyseerr
+</span></span><span style="display:flex;"><span>    │   └── config
+</span></span><span style="display:flex;"><span>    ├── prowlarr
+</span></span><span style="display:flex;"><span>    │   └── config
+</span></span><span style="display:flex;"><span>    ├── radarr
+</span></span><span style="display:flex;"><span>    │   └── config
+</span></span><span style="display:flex;"><span>    ├── sonarr
+</span></span><span style="display:flex;"><span>    │   └── config
+</span></span><span style="display:flex;"><span>    ├── storage
+</span></span><span style="display:flex;"><span>    │   └── downloads
+</span></span><span style="display:flex;"><span>    │       ├── completed
+</span></span><span style="display:flex;"><span>    │       ├── incomplete
+</span></span><span style="display:flex;"><span>    │       ├── medias
+</span></span><span style="display:flex;"><span>    │       │   ├── movies
+</span></span><span style="display:flex;"><span>    │       │   └── series
+</span></span><span style="display:flex;"><span>    │       └── watch
+</span></span><span style="display:flex;"><span>    └── transovpn
+</span></span><span style="display:flex;"><span>        └── config
+</span></span></code></pre></div><p>The <code>/opt/chill/storage/downloads/watch/</code> folder is used when you manually put <code>.torrent</code> files, so it&rsquo;s going to be downloaded automatically without any access to the Transmission interface.</p>
+<ul>
+<li>To check everything was properly created</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ls -lR /opt/chill
+</span></span></code></pre></div><p>Download the <a href="https://github.com/garnajee/home-server/blob/master/docker-compose-medias.yml"><code>docker-compose-medias.yml</code></a> and <a href="https://github.com/garnajee/home-server/blob/master/.env-example"><code>.env-example</code></a> in <code>/opt/chill/</code>, and rename them:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill
+</span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-medias.yml -O docker-compose.yml
+</span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/.env-example -O .env
+</span></span></code></pre></div><h4 id="modify-env">Modify <code>.env</code><a hidden class="anchor" aria-hidden="true" href="#modify-env">#</a></h4>
+<p>Normally, you don&rsquo;t need to modify the docker-compose.yml file. Only the <code>.env</code> file.</p>
+<ul>
+<li>list of <a href="https://haugene.github.io/docker-transmission-openvpn/supported-providers/">VPN PROVIDERS</a></li>
+<li>local subnet mask for <code>NETWORKIP</code> (use this command to know yours) : <code>ip route | awk '!/ (docker0|br-)/ &amp;&amp; /src/ {print $1}'</code></li>
+<li>PUID and PGID</li>
+<li>TZ</li>
+</ul>
+<h4 id="create-a-docker-network">Create a docker network<a hidden class="anchor" aria-hidden="true" href="#create-a-docker-network">#</a></h4>
+<p>This part is optional. It&rsquo;s going to be created automatically. But you can still do it manually if you want.</p>
+<p>I did it manually because of the reverse proxy causing errors if I attached it to the automatically created docker subnet.</p>
+<p>All these images are going to be in the same docker network. To avoid any further conflict, just create it before running the docker-compose.</p>
+<p>Here the subnet is <code>10.10.66.0/24</code>. If you want to change this by something else, you&rsquo;ll need to modify the <code>docker-compose.yml</code> too. But remember, it&rsquo;s just a subnet <em>inside</em> docker, it&rsquo;s not going to affect your local network.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker network rm net-chill
+</span></span><span style="display:flex;"><span>$ docker network create net-chill -d bridge --subnet 10.10.66.0/24
+</span></span></code></pre></div><h3 id="run">Run!<a hidden class="anchor" aria-hidden="true" href="#run">#</a></h3>
+<p>For the first execution of the docker-compose, I recommend to use this command, to check if there is no errors:</p>
+<p>Move the <code>docker-compose.yml</code> and <code>.env</code> file in <code>/opt/chill/</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill/
+</span></span><span style="display:flex;"><span>$ docker-compose up
+</span></span></code></pre></div><p>It&rsquo;s going to download all the images, and start all the services.</p>
+<p><strong>By the way, each request made by Prowlarr and FlareSolverr goes through the VPN.</strong></p>
+<p>Now, if you don&rsquo;t see any red lines among the hundreds of lines that have just scrolled through the terminal, it&rsquo;s usually a good sign.</p>
+<p>So you can now stop this by pressing <code>CTRL+c</code> (one or two times to force stop), and then run the docker-compose again, but in background this time:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill/
+</span></span><span style="display:flex;"><span>$ docker-compose up -d
+</span></span></code></pre></div><p>Check the status of each docker:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker-compose ps -a
+</span></span></code></pre></div><p><code>Status</code> should be <code>Up</code>.</p>
+<h3 id="check-vpn-connection">Check VPN connection<a hidden class="anchor" aria-hidden="true" href="#check-vpn-connection">#</a></h3>
+<p>Now everything is up, just to be sure, you can check if Transmission goes through VPN:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker exec -it transovpn curl ifconfig.co
+</span></span><span style="display:flex;"><span>XXX.XXX.XXX.XXX
+</span></span></code></pre></div><p>And then check the location of this ip address <a href="https://ifconfig.co">here</a> for example.</p>
+<p>You can do the same command (just to be sure) for Prowlarr and Flaresolverr, they have the same ip address.</p>
+<h3 id="update-dockers-images">Update docker&rsquo;s images<a hidden class="anchor" aria-hidden="true" href="#update-dockers-images">#</a></h3>
+<h4 id="update-one-specific-image">Update one specific image<a hidden class="anchor" aria-hidden="true" href="#update-one-specific-image">#</a></h4>
+<p>To update one specific docker image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill
+</span></span><span style="display:flex;"><span>$ docker-compose stop &lt;container_name&gt;
+</span></span><span style="display:flex;"><span>$ docker-compose rm &lt;container_name&gt;
+</span></span><span style="display:flex;"><span>$ docker-compose pull &lt;container_name&gt;
+</span></span><span style="display:flex;"><span>$ docker-compose up -d
+</span></span></code></pre></div><h4 id="update-all-images">Update all images<a hidden class="anchor" aria-hidden="true" href="#update-all-images">#</a></h4>
+<p>To update all images:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker-compose down
+</span></span><span style="display:flex;"><span>$ docker-compose pull
+</span></span><span style="display:flex;"><span>$ docker-compose up -d
+</span></span></code></pre></div><h3 id="access-services">Access services<a hidden class="anchor" aria-hidden="true" href="#access-services">#</a></h3>
+<p>To access services: (<code>IP</code> is the ip of your server)</p>
+<table>
+<thead>
+<tr>
+<th><strong>Service</strong></th>
+<th><strong>Address</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Transmission-openvpn</td>
+<td><code>&lt;IP&gt;:8000</code></td>
+</tr>
+<tr>
+<td>Prowlarr</td>
+<td><code>&lt;IP&gt;:8001</code></td>
+</tr>
+<tr>
+<td>FlareSolverr</td>
+<td><code>&lt;IP&gt;:8002</code></td>
+</tr>
+<tr>
+<td>Jellyfin</td>
+<td><code>&lt;IP&gt;:8003</code></td>
+</tr>
+<tr>
+<td>Jellyseerr</td>
+<td><code>&lt;IP&gt;:8004</code></td>
+</tr>
+<tr>
+<td>Radarr</td>
+<td><code>&lt;IP&gt;:8010</code></td>
+</tr>
+<tr>
+<td>Sonarr</td>
+<td><code>&lt;IP&gt;:8011</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="reverse-proxy">Reverse Proxy<a hidden class="anchor" aria-hidden="true" href="#reverse-proxy">#</a></h2>
+<p>To access Jellyfin and Jellyseerr from outside your local network, you&rsquo;ll need to set up a reverse proxy.</p>
+<p>For that purpose, I&rsquo;m going to use <a href="https://nginxproxymanager.com/setup/">Nginx Proxy Manager</a>.</p>
+<p>You also need to open 2 ports on your router:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Application/Service</th>
+<th style="text-align:center">Internal Port</th>
+<th style="text-align:center">External Port</th>
+<th style="text-align:center">Protocol</th>
+<th style="text-align:center">Equipment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">HTTP</td>
+<td style="text-align:center">8080</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">TCP/UDP</td>
+<td style="text-align:center">Your-Server</td>
+</tr>
+<tr>
+<td style="text-align:center">HTTPS</td>
+<td style="text-align:center">4443</td>
+<td style="text-align:center">443</td>
+<td style="text-align:center">TCP/UDP</td>
+<td style="text-align:center">Your-Server</td>
+</tr>
+</tbody>
+</table>
+<h3 id="whats-inside-1">What&rsquo;s inside<a hidden class="anchor" aria-hidden="true" href="#whats-inside-1">#</a></h3>
+<p>This docker-compose contains:</p>
+<ul>
+<li><a href="https://github.com/NginxProxyManager/nginx-proxy-manager">Nginx Proxy Manager</a></li>
+<li><a href="https://github.com/jc21/docker-mariadb-aria">Maria DB Aria</a></li>
+</ul>
+<h3 id="installation-1">Installation<a hidden class="anchor" aria-hidden="true" href="#installation-1">#</a></h3>
+<ul>
+<li>Create the directory structure</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p /opt/docker/<span style="color:#f92672">{</span>nginx-proxy-manager,npm-db<span style="color:#f92672">}</span>
+</span></span></code></pre></div><p>Download the <a href="https://github.com/garnajee/home-server/blob/master/docker-compose-rp.yml"><code>docker-compose-rp.yml</code></a> in <code>/opt/docker/</code>, and rename it:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/docker
+</span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-rp.yml -O docker-compose.yml
+</span></span></code></pre></div><p>I didn&rsquo;t create a <code>.env</code> file for this docker-compose mainly as this service is not going to be exposed on the web.</p>
+<p>Feel free to modify <code>user</code>, <code>password</code>, <code>name</code>, and so on directly in the <code>docker-compose.yml</code>.</p>
+<h3 id="run-1">Run<a hidden class="anchor" aria-hidden="true" href="#run-1">#</a></h3>
+<p>Simply execute this:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/docker/
+</span></span><span style="display:flex;"><span>$ docker-compose up
+</span></span></code></pre></div><p>Again, it&rsquo;s going to download the docker images. Check if there is no error, and if it&rsquo;s good, hit <code>CTRL+c</code> to stop everything and run this command:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker-compose up -d
+</span></span></code></pre></div><p>The service will be accessible at: <code>&lt;IP&gt;:81</code>.</p>
+<p>The default Admin User is:</p>
+<pre tabindex="0"><code>email: admin@example.com
+password: changeme
+</code></pre><p>You&rsquo;ll be ask to change these informations after the first logging.</p>
+<h3 id="get-a-domain-name--ssl-certificate">Get a domain name &amp; SSL certificate<a hidden class="anchor" aria-hidden="true" href="#get-a-domain-name--ssl-certificate">#</a></h3>
+<p>I bought a domain name from OVH. If you do the same, follow this:</p>
+<ul>
+<li>create an account on <a href="https://ovh.com">OVH</a></li>
+<li>buy a domain name</li>
+<li>once your domain name has been activated, create the necessary token for SSL</li>
+<li>use this <a href="https://www.ovh.com/auth/api/createToken?GET=/domain/zone/*&amp;POST=/domain/zone/*&amp;PUT=/domain/zone/*&amp;DELETE=/domain/zone/*">link</a></li>
+</ul>
+<ul>
+<li><strong>Make sure to write everything</strong></li>
+</ul>
+<p>You&rsquo;ll need something like this:</p>
+<pre tabindex="0"><code>dns_ovh_endpoint = ovh-eu
+dns_ovh_application_key = 109XXX7595XXXXXa
+dns_ovh_application_secret = a1z2g3y435TGcazbXXXXXXXXa45e
+dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
+</code></pre><ul>
+<li>To create your certificate, go back on NPM (<code>&lt;IP&gt;:81</code>), &ldquo;SSL Certificates&rdquo; tab, &ldquo;Add &hellip;&rdquo;</li>
+<li>fill the information for: <code>*.yourdomain.com</code> and <code>yourdomain.com</code></li>
+</ul>
+<h2 id="setup-all-the-services">Setup all the services<a hidden class="anchor" aria-hidden="true" href="#setup-all-the-services">#</a></h2>
+<h3 id="transmission-openvpn">Transmission-openvpn<a hidden class="anchor" aria-hidden="true" href="#transmission-openvpn">#</a></h3>
+<p>Nothing to setup or maybe the &ldquo;Speed Limits&rdquo; depending on your internet connection.</p>
+<h3 id="radarr--sonarr">Radarr &amp; Sonarr<a hidden class="anchor" aria-hidden="true" href="#radarr--sonarr">#</a></h3>
+<p>Follow these <a href="https://trash-guides.info/">guides</a>.</p>
+<p>I create a config to prefer download WEB-DL - MULTi (Original language + Truefrench) - 1080p - h264 - and NO HDR/10 bit.</p>
+<p>If you want to have the same config, see the <a href="https://github.com/garnajee/home-server/blob/master/recyclarr-setup"><code>recyclarr-setup</code></a> folder.</p>
+<h4 id="radarrsonarr-settings">Radarr/Sonarr Settings<a hidden class="anchor" aria-hidden="true" href="#radarrsonarr-settings">#</a></h4>
+<ol>
+<li>Media Management:
+<ul>
+<li>check <code>Replace Illegal Characters</code></li>
+<li>Colon Replacement: <code>Delete</code></li>
+<li>Path <code>/downloads/medias/movies</code> (for sonarr: <code>/downloads/medias/series</code>)</li>
+</ul>
+</li>
+<li>Profiles : click on your profile and <code>Edit groups</code>, then ungroup your selected qualities</li>
+<li>Quality: Not changed</li>
+<li>Custom Formats: automatically imported with recyclarr</li>
+<li>Indexer: it&rsquo;ll be added automatically with Prowlarr</li>
+<li>Download Client:
+<ul>
+<li>add transmission</li>
+<li>host: 10.10.66.100</li>
+<li>port: 9091</li>
+<li>set username and password</li>
+<li>recent priority: <code>last</code></li>
+<li>older priority: <code>last</code></li>
+<li>check <code>Remove Completed</code></li>
+<li><code>Remote Path Mappings</code>: Host: <code>10.10.66.100 (Transmission)</code> ; Remote Path: <code>/data/completed</code> ; Local Path: <code>/data/completed</code></li>
+</ul>
+</li>
+</ol>
+
+<div class="notice info" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="92 59.5 300 300">
+  <path d="M292 303.25V272c0-3.516-2.734-6.25-6.25-6.25H267v-100c0-3.516-2.734-6.25-6.25-6.25h-62.5c-3.516 0-6.25 2.734-6.25 6.25V197c0 3.516 2.734 6.25 6.25 6.25H217v62.5h-18.75c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h87.5c3.516 0 6.25-2.734 6.25-6.25Zm-25-175V97c0-3.516-2.734-6.25-6.25-6.25h-37.5c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h37.5c3.516 0 6.25-2.734 6.25-6.25Zm125 81.25c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span>info</p><blockquote>
+<p>Go under <code>settings/general</code> and copy the API key, you&rsquo;ll need it for Prowlarr</p>
+</blockquote></div>
+
+
+<h3 id="prowlarr">Prowlarr<a hidden class="anchor" aria-hidden="true" href="#prowlarr">#</a></h3>
+<p>Add your indexer. In <code>Tags</code> field, add &ldquo;flaresolverr&rdquo;.</p>
+<p>In order to add <code>Flaresolverr</code> proxy:</p>
+<ul>
+<li>go to <code>Settings &gt; Indexers</code></li>
+<li>add &ldquo;Flaresolverr&rdquo;</li>
+<li>make sure the tag is &ldquo;flaresolverr&rdquo;</li>
+<li>add this ip address: &ldquo;http://10.10.66.100:8191&rdquo;</li>
+<li>save</li>
+</ul>
+<p>Connect to Radarr/Sonarr:</p>
+<ul>
+<li>go to <code>Settings &gt; Apps</code></li>
+<li>add radarr:
+<ul>
+<li>full sync</li>
+<li>prowlarr server: http://10.10.66.100:9696</li>
+<li>radarr server: http://10.10.66.110:7878</li>
+</ul>
+</li>
+</ul>
+<h3 id="jellyfin">Jellyfin<a hidden class="anchor" aria-hidden="true" href="#jellyfin">#</a></h3>
+<p>Follow the steps, it&rsquo;s easy.</p>
+<p>Create all the users who are going to access to Jellyfin <strong>and</strong> Jellyseerr.</p>
+<p>To have better images for your libraries, you can use <a href="https://imgur.com/a/Guqk15B">these images</a>.</p>
+<p><strong>Prevent users from changing their password:</strong></p>
+<p>Go into <em>Dashboard</em> &gt; <em>General</em> &gt; scroll down to the <em>CSS</em> section and add this CSS code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-css" data-lang="css"><span style="display:flex;"><span>.<span style="color:#a6e22e">updatePasswordForm</span> {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">display</span>: <span style="color:#66d9ef">none</span> <span style="color:#75715e">!important</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p><strong>Add a custom button in the menu</strong></p>
+<p>You can add a custom button to the Jellyfin menu. For example, you can add a link to Jellyseerr.</p>
+<p>To do that, you need to add this line in the Jellyfin&rsquo;s <code>volume</code> field in the docker-compose file:</p>
+<pre tabindex="0"><code>- ${BASE}/jellyfin/web-config.json:/usr/share/jellyfin/web/config.json
+</code></pre><p>And add the <code>web-config.json</code> file in your <code>/opt/chill/jellyfin/</code> folder.</p>
+<p><em>You&rsquo;ll see that the docker path is not the same as in the documentation. I don&rsquo;t know why, but that&rsquo;s the only way I can get it to work.</em></p>
+<p>Read more <a href="https://jellyfin.org/docs/general/clients/web-config/#custom-menu-links">here</a>.</p>
+<h3 id="jellyseerr">Jellyseerr<a hidden class="anchor" aria-hidden="true" href="#jellyseerr">#</a></h3>
+<p>Follow the steps, it&rsquo;s easy.</p>
+<p>Sign in with your Jellyfin account and make sure to use the jellyfin <em>internal docker ip address</em> for the &ldquo;Jellyfin URL&rdquo;.</p>
+<p>When Syncing Librairies, uncheck &ldquo;Collections&rdquo;.</p>
+<p>Then, add your radarr and sonarr server (still with the internal docker ip address).</p>
+<p>Once this is done, you can sync Jellyfin users with Jellyseerr, so that they have the same account for Jellyfin and Jellyseerr.</p>
+<p>For sonarr server settings, make sure to check <em>Season folder</em>.</p>
+<h2 id="bonus">Bonus<a hidden class="anchor" aria-hidden="true" href="#bonus">#</a></h2>
+<p>Don&rsquo;t want to use a reverse proxy?</p>
+<p>You can use a VPN:</p>
+<ul>
+<li>Official Synology VPN package -&gt; <em>need to open port on your router</em></li>
+</ul>
+<p>And if you don&rsquo;t want to open port on your router (or if you can&rsquo;t):</p>
+<ul>
+<li><a href="https://tailscale.com/kb/1131/synology/">Tailscale</a> on Synology</li>
+<li><a href="https://github.com/cloudflare/cloudflared">CloudFlare Tunnel</a></li>
+</ul>
+
+<div class="notice warning" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
+  <path d="M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z"/>
+</svg>
+
+        </span>warning</p><blockquote>
+<p>Pay attention to not use CloudFlare tunnel for Jellyfin streaming, you may be banned for breaking <a href="https://www.cloudflare.com/en-gb/terms/">TOS</a>.</p>
+</blockquote></div>
+
+
+<h3 id="webhooks">Webhooks<a hidden class="anchor" aria-hidden="true" href="#webhooks">#</a></h3>
+<p>I provide some webhooks for Jellyfin. These webhooks are used for:</p>
+<ul>
+<li><a href="/posts/home-server/#any-api-link">Any API (WhatsApp in my case)</a></li>
+<li><a href="/posts/home-server/#discord-webhook">Discord</a></li>
+<li><a href="/posts/home-server/#ms-teams-webhook">Microsoft Teams</a></li>
+</ul>
+<p>First of all, you need to install the Jellyfin plugin called &ldquo;Webhooks&rdquo;: Jellyfin &gt; Dashboard &gt; Plugins &gt; Catalog &gt; Webhook</p>
+<p>Then, you need to restart Jellyfin:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill/
+</span></span><span style="display:flex;"><span>$ docker-compose restart jellyfin
+</span></span></code></pre></div><p>Now, go back to Jellyfin in the Plugins tab and click on Webhook.</p>
+<p>The &ldquo;<em>Server Url</em>&rdquo; is your Jellyfin URL. If you expose it on internet, it&rsquo;s something like this: <a href="https://jellyfin.yourdomainname.com/">https://jellyfin.yourdomainname.com/</a></p>
+<p><em>If you don&rsquo;t have a domain name, Jellyfin will not be able to display images (posters) in the Discord/Teams webhooks.</em></p>
+<details close>
+  <summary id="any-api-link">Any API</summary>
+    <p>This method will allow you to send a webhook to any service/api you want in a very easy way.</p>
+    <p>This consists of using your own API and create your request in Python (which is more flexible than the Jellyfin Webhook plugin) and send it to the API you want.</p>
+    <h5>Steps:</h5>
+    <ol>
+      <li>
+        <b>Modify the <em>jellyhookapi.py</em> file:</b><br>
+        You'll need to customize the <a href="https://github.com/garnajee/JellyHookAPI/blob/master/jellyhookapi.py">JellyHookAPI/jellyhookapi.py</a> file according to your specific needs.
+      </li>
+      <li>
+        <b>Add the Handlebars template:</b><br>
+        Navigate to Jellyfin > Plugin > Webhook > "Generic Destination" and add the <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/global-item.handlebars">Handlebars template</a>.
+      </li>
+      <li>
+        <b>Build and run the Docker image:</b><br>
+        For detailed instructions on building and running the Docker image, refer to the <a href="https://github.com/garnajee/JellyHookAPI/tree/master#jellyhookapi">JellyHookAPI/README</a> in the JellyHookAPI folder.
+      </li>
+    </ol>
+    <p>Finally, in my case, I wanted to send notification to a WhatsApp group. If you wan to do this, follow <a href="https://github.com/garnajee/home-server/blob/master/whatsapp-api#whatsapp-api">these instructions</a></p>
+
+</details>
+
+
+<details close>
+  <summary id="discord-webhook">Discord Webhook</summary>
+    <p>To add a <strong>Discord</strong> webhook:</p>
+    <ul>
+      <li>click on "Add Discord Destination"</li>
+      <li>"<em>Webhook Name</em>": what you want</li>
+      <li>"<em>Webhook Url</em>": the discord webhook url</li>
+      <li>"<em>Notification type</em>":</li>
+    <ol>
+      <li>if you want to receive notification when a new item (movie/tv show/...) is added, check "<em>Item Added</em>"</li>
+      <li>or when a user is locked out (because of too much wrong password during connection), check "<em>User Locked Out</em>"</li>
+      <li>or when a user is created/deleted, when a password is changed, ... (for every use case check <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users.handlebars">this file</a>), check "<em>Authentication</em>" and "<em>User</em>"</li>
+    </ol>
+    <li>"<em>User Filter</em>": personally, I don't check anything here</li>
+    <li>"<em>Item Type</em>": check everything (depending on your webhook template) <strong>except</strong> "<em>Send All Properties</em>"</li>
+    <li>"<em>Template</em>": (copy and paste the content)</li>
+    <ol>
+      <li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-item.handlebars">webhooks/jellyfin/discord/discord-item.handlebars</a></li>
+      <li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users-locked-out.handlebars">webhooks/jellyfin/discord/discord-users-locked-out.handlebars</a></li>
+      <li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users.handlebars">webhooks/jellyfin/discord/discord-users.handlebars</a></li>
+    </ol>
+    <li>"<em>Avatar Url</em>": just change the avatar profile picture directly on Discord</li>
+    <li>"<em>Webhook Username</em>": should not be empty, but you can write what you want, the real username is defined directly in Discord</li>
+    <li>"<em>Mention Type</em>": I never used this</li>
+    <li>"<em>Embed Color</em>": color of the embedded message</li>
+  </ul>
+  <p>Then click save.</p>
+
+</details>
+
+
+<details close>
+  <summary id="ms-teams-webhook">Microsoft Teams Webhook</summary>
+  <p>To add a <strong>Microsoft Teams</strong> webhook:</p>
+  <ul>
+    <li>click on "Add a Generic Destination"</li>
+    <li>check the steps for Discord, it's the same</li>
+    <li>"<em>Template</em>":</li>
+    <ol>
+      <li>"<em>Item Added</em>": <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-items.handlebars">webhooks/jellyfin/ms-teams/teams-items.handlebars</a></li>
+      <li>"<em>User Locked Out</em>": <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users-locked-out.handlebars">webhooks/jellyfin/ms-teams/teams-users-locked-out.handlebars</a></li>
+      <li>"<em>User</em>": <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users.handlebars">webhooks/jellyfin/ms-teams/teams-users.handlebars</a></li>
+    </ol>
+  </ul>
+
+</details>
+
+
+<h3 id="fake-ratio">Fake Ratio<a hidden class="anchor" aria-hidden="true" href="#fake-ratio">#</a></h3>
+<p>If you need to fake your upload stats on (semi-)private indexers, in order to have a ratio &gt;= 1.</p>
+
+<div class="notice warning" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
+  <path d="M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z"/>
+</svg>
+
+        </span>warning</p><blockquote>
+<p>I don&rsquo;t recommend using this indefinitely, please consider sharing to the community.</p>
+</blockquote></div>
+
+
+<p>You can use <a href="https://github.com/garnajee/Ratio.py">Ratio.py</a>.</p>
+<p>To use this python script in a secure way, you can add it in the <code>transmission-openvpn</code> docker (already running).
+That way, everything will go through the vpn.</p>
+<details close>
+  <summary id="fake-ratio-steps">To do this, follow these steps:</summary>
+  <ul>
+    <li>create the folder:</li>
+  </ul>
+
+  <pre>
+  <code>
+  $ cd /opt/chill
+  $ mkdir -p transovpn/ratio
+  </code>
+  </pre>
+
+  <ul>
+    <li>add this in the <code>docker-compose.yml</code>:</li>
+  </ul>
+
+  <pre>
+  <code>
+      volumes:
+        - ${BASE}/transovpn/config:/config
+        - ${DOWNLOADS}:/data
+        <span style="background-color: #008000">- ${BASE}/transovpn/ratio/:/home/</span>
+  </code>
+  </pre>
+
+  <ul>
+    <li>then download the content of <code>Ratio.py</code> repository inside the <code>ratio</code> folder.</li>
+    <li>download a very popular and highly leeched torrent file and put it inside the <code>ratio</code> folder.</li>
+    <li>modify the <code>config.json</code> file to match the torrent file name and path. Add your desired upload speed.</li>
+    <li>install python and run the script:</li>
+  </ul>
+
+  <pre>
+  <code>
+  $ cd /opt/chill/
+  $ docker exec -it transovpn bash
+  # apt update && apt install python3 python3-pip
+  # cd /home
+  # pip install -r requirements.txt
+  # nohup python3 ratio.py -c config.json &amp;
+  </code>
+  </pre>
+
+  <ul>
+    <li>to view logs : <code># tail -f nohup.out</code></li>
+  </ul>
+
+</details>
+
+
+<h1 id="license">License<a hidden class="anchor" aria-hidden="true" href="#license">#</a></h1>
+<p>This project is under <a href="https://github.com/garnajee/home-server/blob/master/LICENSE">MIT</a> License.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/home-server/">Home-Server</a></li>
+      <li><a href="http://localhost:1313/tags/home-lab/">Home-Lab</a></li>
+      <li><a href="http://localhost:1313/tags/server/">Server</a></li>
+      <li><a href="http://localhost:1313/tags/lab/">Lab</a></li>
+      <li><a href="http://localhost:1313/tags/media/">Media</a></li>
+      <li><a href="http://localhost:1313/tags/download/">Download</a></li>
+      <li><a href="http://localhost:1313/tags/docker/">Docker</a></li>
+      <li><a href="http://localhost:1313/tags/docker-compose/">Docker-Compose</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/home-server/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Home Server</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/settings/">
+    <span class="title">Next »</span>
+    <br>
+    <span>My Settings</span>
+  </a>
+</nav>
+
+    
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2024 <a href="http://localhost:1313/">Jean SEVAUX</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
