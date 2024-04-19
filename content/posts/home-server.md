@@ -21,7 +21,7 @@ This is my perfect docker-compose for my streaming server.
 You'll find two 2 docker-compose, one to create the streaming services and the other one to access them through a reverse proxy.
 
 {{< notice note >}}
-I've also created a <p><a href="https://github.com/garnajee/home-server/blob/master/chill-extra"><code>chill-extra</code></a></p> folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the <a href="https://github.com/garnajee/removarr">removarr</a> docker and other scripts.
+I've also created a [`chill-extra`](https://github.com/garnajee/home-server/blob/master/chill-extra) folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the [removarr](https://github.com/garnajee/removarr) docker and other scripts.
 {{< /notice >}}
 
 {{< notice info >}}
