@@ -128,7 +128,7 @@
     <h1 class="post-title">
       Home Server
     </h1>
-    <div class="post-meta"><span title='2023-04-25 10:11:41 +0200 CEST'>April 25, 2023</span>&nbsp;·&nbsp;13 min&nbsp;·&nbsp;Garnajee
+    <div class="post-meta"><span title='2023-04-25 10:11:41 +0200 CEST'>April 25, 2023</span>&nbsp;·&nbsp;11 min&nbsp;·&nbsp;Garnajee
 
 </div>
   </header> <div class="toc">
@@ -187,17 +187,15 @@
                     <a href="#setup-all-the-services" aria-label="Setup all the services">Setup all the services</a><ul>
                         
                 <li>
-                    <a href="#transmission" aria-label="Transmission">Transmission</a></li>
-                <li>
-                    <a href="#jackett" aria-label="Jackett">Jackett</a></li>
+                    <a href="#transmission-openvpn" aria-label="Transmission-openvpn">Transmission-openvpn</a></li>
                 <li>
                     <a href="#radarr--sonarr" aria-label="Radarr &amp;amp; Sonarr">Radarr &amp; Sonarr</a><ul>
                         
                 <li>
-                    <a href="#radarr-settings" aria-label="Radarr Settings">Radarr Settings</a></li>
-                <li>
-                    <a href="#sonarr-settings" aria-label="Sonarr Settings">Sonarr Settings</a></li></ul>
+                    <a href="#radarrsonarr-settings" aria-label="Radarr/Sonarr Settings">Radarr/Sonarr Settings</a></li></ul>
                 </li>
+                <li>
+                    <a href="#prowlarr" aria-label="Prowlarr">Prowlarr</a></li>
                 <li>
                     <a href="#jellyfin" aria-label="Jellyfin">Jellyfin</a></li>
                 <li>
@@ -208,27 +206,19 @@
                         
                 <li>
                     <a href="#webhooks" aria-label="Webhooks">Webhooks</a><ul>
+                        <ul>
                         
                 <li>
-                    <a href="#global-webhook" aria-label="Global Webhook">Global Webhook</a><ul>
-                        
+                    <a href="#" aria-label="Steps:">Steps:</a></li></ul>
+                    </ul>
+                </li>
                 <li>
-                    <a href="#discord-webhook" aria-label="Discord Webhook">Discord Webhook</a></li>
-                <li>
-                    <a href="#microsoft-teams-webhook" aria-label="Microsoft Teams Webhook">Microsoft Teams Webhook</a></li>
-                <li>
-                    <a href="#old-method-whatsapp-webhook" aria-label="Old method WhatsApp Webhook">Old method WhatsApp Webhook</a></li>
-                <li>
-                    <a href="#new-method-whatsapp-webhook" aria-label="New method WhatsApp Webhook">New method WhatsApp Webhook</a></li></ul>
+                    <a href="#fake-ratio" aria-label="Fake Ratio">Fake Ratio</a></li></ul>
                 </li></ul>
                 </li>
                 <li>
-                    <a href="#fake-ratio" aria-label="Fake Ratio">Fake Ratio</a>
+                    <a href="#license" aria-label="License">License</a>
                 </li>
-            </ul>
-            </li>
-            </ul>
-            </li>
             </ul>
         </div>
     </details>
@@ -259,7 +249,7 @@
     }
 
     .notice p:last-child {
-        margin-bottom: 0
+        margin-bottom: 0px;
     }
 
     .notice-title {
@@ -321,6 +311,31 @@
         top: .125em;
         position: relative
     }
+
+    
+    .notice code,
+    .notice a {
+      color: #f8f8f2; 
+      background-color: #272822; 
+      padding: 4px; 
+      border-radius: 4px; 
+      font-family: 'Courier New', 'monospace'; 
+      font-size: 18px
+    }
+
+    .notice.warning blockquote {
+      border-left: 4px solid #c33;
+    }
+    .notice.info blockquote {
+      border-left: 4px solid #fb7;
+    }
+    .notice.note blockquote {
+      border-left: 4px solid #6be;
+    }
+    .notice.tip blockquote {
+      border-left: 4px solid #5a5;
+    }
+
 </style><div class="notice warning" >
     <p class="notice-title">
         <span class="icon-notice baseline">
@@ -335,10 +350,35 @@
 
 <h1 id="about">About<a hidden class="anchor" aria-hidden="true" href="#about">#</a></h1>
 <p>In this very complete guide (available <a href="https://github.com/garnajee/home-server/">here on github</a>), you&rsquo;ll be able to install from scratch a perfect home-server for a full media donwload and stream automation</p>
-<p>This is my near-perfect docker-compose for my streaming server.</p>
-<p>You&rsquo;ll find two 2 main docker-compose, one to create the streaming services and the other one to access them through a reverse proxy.</p>
+<p>This is my perfect docker-compose for my streaming server.</p>
+<p>You&rsquo;ll find two 2 docker-compose, one to create the streaming services and the other one to access them through a reverse proxy.</p>
+
+<div class="notice note" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 128 300 300">
+  <path d="M150 128c82.813 0 150 67.188 150 150 0 82.813-67.188 150-150 150C67.187 428 0 360.812 0 278c0-82.813 67.188-150 150-150Zm25 243.555v-37.11c0-3.515-2.734-6.445-6.055-6.445h-37.5c-3.515 0-6.445 2.93-6.445 6.445v37.11c0 3.515 2.93 6.445 6.445 6.445h37.5c3.32 0 6.055-2.93 6.055-6.445Zm-.39-67.188 3.515-121.289c0-1.367-.586-2.734-1.953-3.516-1.172-.976-2.93-1.562-4.688-1.562h-42.968c-1.758 0-3.516.586-4.688 1.563-1.367.78-1.953 2.148-1.953 3.515l3.32 121.29c0 2.734 2.93 4.882 6.64 4.882h36.134c3.515 0 6.445-2.148 6.64-4.883Z"/>
+</svg>
+
+        </span>note</p><blockquote>
+<p>I&rsquo;ve also created a <a href="https://github.com/garnajee/home-server/blob/master/chill-extra"><code>chill-extra</code></a> folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the <a href="https://github.com/garnajee/removarr">removarr</a> docker and other scripts.</p>
+</blockquote></div>
+
+
+
+<div class="notice info" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="92 59.5 300 300">
+  <path d="M292 303.25V272c0-3.516-2.734-6.25-6.25-6.25H267v-100c0-3.516-2.734-6.25-6.25-6.25h-62.5c-3.516 0-6.25 2.734-6.25 6.25V197c0 3.516 2.734 6.25 6.25 6.25H217v62.5h-18.75c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h87.5c3.516 0 6.25-2.734 6.25-6.25Zm-25-175V97c0-3.516-2.734-6.25-6.25-6.25h-37.5c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h37.5c3.516 0 6.25-2.734 6.25-6.25Zm125 81.25c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span>info</p><blockquote>
 <p>The only thing to modify is the <code>.env</code> file to suits your setup.</p>
-<p>Here, we are going to install everything under <code>/opt/chill/</code> (all services for full automation) and <code>/opt/docker/</code> (reverse proxy).</p>
+</blockquote></div>
+
+
+<p>Here, we are going to install everything under <code>/opt/chill/</code> (full streaming automation) and <code>/opt/docker/</code> (reverse proxy).</p>
 <p>To install everything, just follow this Readme in this order.</p>
 <h2 id="requirements">Requirements<a hidden class="anchor" aria-hidden="true" href="#requirements">#</a></h2>
 <ul>
@@ -349,25 +389,23 @@
 </ul>
 <p>Synology Server:</p>
 <ul>
-<li>Download the Docker App available on Synology Package Center</li>
-<li>Create a docker <a href="https://trash-guides.info/Hardlinks/How-to-setup-for/Synology/#create-a-user">user</a>
+<li>
+<p>Download the Docker App available on Synology Package Center</p>
+</li>
+<li>
+<p>Create a docker <a href="https://trash-guides.info/Hardlinks/How-to-setup-for/Synology/#create-a-user">user</a></p>
 <ul>
-<li>once it&rsquo;s done, connect on SSH and type <code>id &lt;username&gt;</code> and write down the <code>uid</code> and <code>gid</code> respectively <code>PUID</code> and <code>PGID</code> for the <code>.env</code>.</li>
+<li>once it&rsquo;s done, connect on SSH and type <code>id &lt;username&gt;</code> and write down the <code>uid</code> and <code>gid</code> respectively <code>PUID</code> and <code>PGID</code> for the <a href=".env-example"><code>.env</code></a>.</li>
 </ul>
 </li>
-<li>Connect on SSH and download <code>docker-compose</code> <a href="https://docs.docker.com/compose/install/other/">latest command version</a>:
+<li>
+<p>Connect on SSH and download <code>docker-compose</code> <a href="https://docs.docker.com/compose/install/other/">latest command version</a>:</p>
 <ul>
-<li>if you are on a system that support <code>apt</code> packages, you can use the <code>compose</code> plugin: <code>apt install docker-compose-plugin</code> (it&rsquo;s better for updates)
-<ul>
-<li>check version: <code>$ docker compose version</code>
-<ul>
-<li>note: with the <code>compose</code> plugin you don&rsquo;t need the <code>-</code> between <code>docker</code> and <code>compose</code></li>
+<li>or use my custom script to <a href="https://github.com/garnajee/home-server/blob/master/chill-extra/update-docker-compose.sh">download the latest docker-compose release</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li>or you can use the binary (I use it) and run my custom script to download the latest docker-compose version: <a href="https://github.com/garnajee/home-server/blob/master/update-docker-compose.sh">available here</a></li>
-</ul>
+<li>
+<p>check version: <code>$ docker-compose version</code></p>
 </li>
 </ul>
 <h2 id="medias-server">Medias Server<a hidden class="anchor" aria-hidden="true" href="#medias-server">#</a></h2>
@@ -375,13 +413,12 @@
 <p>This docker-compose contains:</p>
 <ul>
 <li><a href="https://github.com/haugene/docker-transmission-openvpn">Transmission-openvpn</a></li>
-<li><a href="https://github.com/Jackett/Jackett">Jackett</a></li>
+<li><a href="https://github.com/Prowlarr/Prowlarr">Prowlarr</a></li>
 <li><a href="https://github.com/FlareSolverr/FlareSolverr">FlareSolverr</a></li>
 <li><a href="https://github.com/jellyfin/jellyfin">Jellyfin</a></li>
 <li><a href="https://github.com/Fallenbagel/jellyseerr">Jellyseerr</a></li>
 <li><a href="https://github.com/Radarr/Radarr">Radarr</a></li>
 <li><a href="https://github.com/Sonarr/Sonarr">Sonarr</a></li>
-<li><a href="https://github.com/garnajee/removarr">Removarr</a></li>
 </ul>
 <h3 id="installation">Installation<a hidden class="anchor" aria-hidden="true" href="#installation">#</a></h3>
 <ul>
@@ -391,15 +428,15 @@
 </span></span></code></pre></div><ul>
 <li>Create the structure for every services</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p /opt/chill/<span style="color:#f92672">{</span>transovpn/<span style="color:#f92672">{</span>config,ratio<span style="color:#f92672">}</span>,jackett/config,jellyfin/config,jellyseerr/config,radarr/config,sonarr/config,bazarr/config,storage/downloads/<span style="color:#f92672">{</span>completed,incomplete,watch,medias/<span style="color:#f92672">{</span>movies,series<span style="color:#f92672">}}}</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p /opt/chill/<span style="color:#f92672">{</span>transovpn/<span style="color:#f92672">{</span>config<span style="color:#f92672">}</span>,prowlarr/config,jellyfin/config,jellyseerr/config,radarr/config,sonarr/config,storage/downloads/<span style="color:#f92672">{</span>completed,incomplete,watch,medias/<span style="color:#f92672">{</span>movies,series<span style="color:#f92672">}}}</span>
 </span></span></code></pre></div><p>Here is what it&rsquo;s going to create:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>opt
 </span></span><span style="display:flex;"><span>└── chill
-</span></span><span style="display:flex;"><span>    ├── jackett
-</span></span><span style="display:flex;"><span>    │   └── config
 </span></span><span style="display:flex;"><span>    ├── jellyfin
 </span></span><span style="display:flex;"><span>    │   └── config
 </span></span><span style="display:flex;"><span>    ├── jellyseerr
+</span></span><span style="display:flex;"><span>    │   └── config
+</span></span><span style="display:flex;"><span>    ├── prowlarr
 </span></span><span style="display:flex;"><span>    │   └── config
 </span></span><span style="display:flex;"><span>    ├── radarr
 </span></span><span style="display:flex;"><span>    │   └── config
@@ -414,15 +451,13 @@
 </span></span><span style="display:flex;"><span>    │       │   └── series
 </span></span><span style="display:flex;"><span>    │       └── watch
 </span></span><span style="display:flex;"><span>    └── transovpn
-</span></span><span style="display:flex;"><span>        ├── config
-</span></span><span style="display:flex;"><span>        └── ratio
-</span></span></code></pre></div><p>The <code>/opt/chill/transovpn/ratio/</code> folder is used to fake your upload stats on (semi-)private indexers. See <a href="/posts/home-server/#fake-ratio">Fake Ratio</a>.</p>
-<p>The <code>/opt/chill/storage/downloads/watch/</code> folder is used when you manually put <code>.torrent</code> files, so it&rsquo;s going to be downloaded automatically without any access to the Transmission interface.</p>
+</span></span><span style="display:flex;"><span>        └── config
+</span></span></code></pre></div><p>The <code>/opt/chill/storage/downloads/watch/</code> folder is used when you manually put <code>.torrent</code> files, so it&rsquo;s going to be downloaded automatically without any access to the Transmission interface.</p>
 <ul>
 <li>To check everything was properly created</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ ls -lR /opt/chill
-</span></span></code></pre></div><p>Download the <code>docker-compose-medias.yml</code> and <code>.env-example</code> in <code>/opt/chill/</code>, and rename them:</p>
+</span></span></code></pre></div><p>Download the <a href="https://github.com/garnajee/home-server/blob/master/docker-compose-medias.yml"><code>docker-compose-medias.yml</code></a> and <a href="https://github.com/garnajee/home-server/blob/master/.env-example"><code>.env-example</code></a> in <code>/opt/chill/</code>, and rename them:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill
 </span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-medias.yml -O docker-compose.yml
 </span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/.env-example -O .env
@@ -430,7 +465,7 @@
 <p>Normally, you don&rsquo;t need to modify the docker-compose.yml file. Only the <code>.env</code> file.</p>
 <ul>
 <li>list of <a href="https://haugene.github.io/docker-transmission-openvpn/supported-providers/">VPN PROVIDERS</a></li>
-<li>local subnet mask for <code>NETWORKIP</code>: <code>ip route | awk '!/ (docker0|br-)/ &amp;&amp; /src/ {print $1}'</code></li>
+<li>local subnet mask for <code>NETWORKIP</code> (use this command to know yours) : <code>ip route | awk '!/ (docker0|br-)/ &amp;&amp; /src/ {print $1}'</code></li>
 <li>PUID and PGID</li>
 <li>TZ</li>
 </ul>
@@ -447,19 +482,20 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill/
 </span></span><span style="display:flex;"><span>$ docker-compose up
 </span></span></code></pre></div><p>It&rsquo;s going to download all the images, and start all the services.</p>
-<p><strong>By the way, each request made by Jackett and FlareSolverr goes through the VPN.</strong></p>
+<p><strong>By the way, each request made by Prowlarr and FlareSolverr goes through the VPN.</strong></p>
 <p>Now, if you don&rsquo;t see any red lines among the hundreds of lines that have just scrolled through the terminal, it&rsquo;s usually a good sign.</p>
 <p>So you can now stop this by pressing <code>CTRL+c</code> (one or two times to force stop), and then run the docker-compose again, but in background this time:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill/
 </span></span><span style="display:flex;"><span>$ docker-compose up -d
 </span></span></code></pre></div><p>Check the status of each docker:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker ps -a
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker-compose ps -a
 </span></span></code></pre></div><p><code>Status</code> should be <code>Up</code>.</p>
 <h3 id="check-vpn-connection">Check VPN connection<a hidden class="anchor" aria-hidden="true" href="#check-vpn-connection">#</a></h3>
 <p>Now everything is up, just to be sure, you can check if Transmission goes through VPN:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ docker exec -it transovpn curl ifconfig.co
 </span></span><span style="display:flex;"><span>XXX.XXX.XXX.XXX
 </span></span></code></pre></div><p>And then check the location of this ip address <a href="https://ifconfig.co">here</a> for example.</p>
+<p>You can do the same command (just to be sure) for Prowlarr and Flaresolverr, they have the same ip address.</p>
 <h3 id="update-dockers-images">Update docker&rsquo;s images<a hidden class="anchor" aria-hidden="true" href="#update-dockers-images">#</a></h3>
 <h4 id="update-one-specific-image">Update one specific image<a hidden class="anchor" aria-hidden="true" href="#update-one-specific-image">#</a></h4>
 <p>To update one specific docker image:</p>
@@ -488,7 +524,7 @@
 <td><code>&lt;IP&gt;:8000</code></td>
 </tr>
 <tr>
-<td>Jackett</td>
+<td>Prowlarr</td>
 <td><code>&lt;IP&gt;:8001</code></td>
 </tr>
 <tr>
@@ -511,10 +547,6 @@
 <td>Sonarr</td>
 <td><code>&lt;IP&gt;:8011</code></td>
 </tr>
-<tr>
-<td>Removarr</td>
-<td><code>&lt;IP&gt;:8012</code></td>
-</tr>
 </tbody>
 </table>
 <h2 id="reverse-proxy">Reverse Proxy<a hidden class="anchor" aria-hidden="true" href="#reverse-proxy">#</a></h2>
@@ -524,27 +556,27 @@
 <table>
 <thead>
 <tr>
-<th>Application/Service</th>
-<th>Internal Port</th>
-<th>External Port</th>
-<th>Protocol</th>
-<th>Equipment</th>
+<th style="text-align:center">Application/Service</th>
+<th style="text-align:center">Internal Port</th>
+<th style="text-align:center">External Port</th>
+<th style="text-align:center">Protocol</th>
+<th style="text-align:center">Equipment</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>HTTP</td>
-<td>8080</td>
-<td>80</td>
-<td>TCP/UDP</td>
-<td>Your-Server</td>
+<td style="text-align:center">HTTP</td>
+<td style="text-align:center">8080</td>
+<td style="text-align:center">80</td>
+<td style="text-align:center">TCP/UDP</td>
+<td style="text-align:center">Your-Server</td>
 </tr>
 <tr>
-<td>HTTPS</td>
-<td>4443</td>
-<td>443</td>
-<td>TCP/UDP</td>
-<td>Your-Server</td>
+<td style="text-align:center">HTTPS</td>
+<td style="text-align:center">4443</td>
+<td style="text-align:center">443</td>
+<td style="text-align:center">TCP/UDP</td>
+<td style="text-align:center">Your-Server</td>
 </tr>
 </tbody>
 </table>
@@ -559,7 +591,7 @@
 <li>Create the directory structure</li>
 </ul>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ mkdir -p /opt/docker/<span style="color:#f92672">{</span>nginx-proxy-manager,npm-db<span style="color:#f92672">}</span>
-</span></span></code></pre></div><p>Download the <code>docker-compose-rp.yml</code> in <code>/opt/docker/</code>, and rename it:</p>
+</span></span></code></pre></div><p>Download the <a href="https://github.com/garnajee/home-server/blob/master/docker-compose-rp.yml"><code>docker-compose-rp.yml</code></a> in <code>/opt/docker/</code>, and rename it:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/docker
 </span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-rp.yml -O docker-compose.yml
 </span></span></code></pre></div><p>I didn&rsquo;t create a <code>.env</code> file for this docker-compose mainly as this service is not going to be exposed on the web.</p>
@@ -582,6 +614,8 @@ password: changeme
 <li>buy a domain name</li>
 <li>once your domain name has been activated, create the necessary token for SSL</li>
 <li>use this <a href="https://www.ovh.com/auth/api/createToken?GET=/domain/zone/*&amp;POST=/domain/zone/*&amp;PUT=/domain/zone/*&amp;DELETE=/domain/zone/*">link</a></li>
+</ul>
+<ul>
 <li><strong>Make sure to write everything</strong></li>
 </ul>
 <p>You&rsquo;ll need something like this:</p>
@@ -594,110 +628,25 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 <li>fill the information for: <code>*.yourdomain.com</code> and <code>yourdomain.com</code></li>
 </ul>
 <h2 id="setup-all-the-services">Setup all the services<a hidden class="anchor" aria-hidden="true" href="#setup-all-the-services">#</a></h2>
-<h3 id="transmission">Transmission<a hidden class="anchor" aria-hidden="true" href="#transmission">#</a></h3>
+<h3 id="transmission-openvpn">Transmission-openvpn<a hidden class="anchor" aria-hidden="true" href="#transmission-openvpn">#</a></h3>
 <p>Nothing to setup or maybe the &ldquo;Speed Limits&rdquo; depending on your internet connection.</p>
-<h3 id="jackett">Jackett<a hidden class="anchor" aria-hidden="true" href="#jackett">#</a></h3>
-<p>Check the box:</p>
-<ul>
-<li>External access</li>
-<li>Cache enabled (recommended)</li>
-</ul>
-<p>Add these values:</p>
-<ul>
-<li>&ldquo;Cache TTL (seconds):&rdquo; <code>2100</code></li>
-<li>&ldquo;Cache max results per indexer:&rdquo; <code>1000</code></li>
-<li>&ldquo;FlareSolverr API URL:&rdquo; <code>http://10.10.66.100:8191</code>    # <strong>if you don&rsquo;t change anything on the docker-compose, that&rsquo;s it</strong></li>
-<li>&ldquo;FlareSolverr Max Timeout (ms):&rdquo; <code>100000</code></li>
-</ul>
-<p>Leave the rest blank.</p>
-<p>Add your indexer(s).</p>
 <h3 id="radarr--sonarr">Radarr &amp; Sonarr<a hidden class="anchor" aria-hidden="true" href="#radarr--sonarr">#</a></h3>
 <p>Follow these <a href="https://trash-guides.info/">guides</a>.</p>
-<p>This is a config to prefer download WEB-DL 1080p x264 <em>NOT 10bit</em> files.</p>
-<h4 id="radarr-settings">Radarr Settings<a hidden class="anchor" aria-hidden="true" href="#radarr-settings">#</a></h4>
-<p>Format: <code>Name: X|req|neg ; regex</code></p>
-<blockquote>
-<p>Name: name of the condition</p>
-</blockquote>
-<blockquote>
-<p>X: neither &ldquo;Negate&rdquo; nor &ldquo;Required&rdquo; checked</p>
-</blockquote>
-<blockquote>
-<p>regex: Regular Expression</p>
-</blockquote>
-<p>If there is <strong>something</strong> before the condition, it means that when you clicked &ldquo;import&rdquo;, you should choose the <strong>something</strong> instead of <strong>Release title</strong>.</p>
+<p>I create a config to prefer download WEB-DL - MULTi (Original language + Truefrench) - 1080p - h264 - and NO HDR/10 bit.</p>
+<p>If you want to have the same config, see the <a href="https://github.com/garnajee/home-server/blob/master/recyclarr-setup"><code>recyclarr-setup</code></a> folder.</p>
+<h4 id="radarrsonarr-settings">Radarr/Sonarr Settings<a hidden class="anchor" aria-hidden="true" href="#radarrsonarr-settings">#</a></h4>
 <ol>
 <li>Media Management:
 <ul>
 <li>check <code>Replace Illegal Characters</code></li>
-<li>Color Replacement: <code>Delete</code></li>
-<li>Path /downloads/medias/movies</li>
+<li>Colon Replacement: <code>Delete</code></li>
+<li>Path <code>/downloads/medias/movies</code> (for sonarr: <code>/downloads/medias/series</code>)</li>
 </ul>
 </li>
-<li>Profiles:
-<ul>
-<li><img loading="lazy" src="/images/home-server/radarr-profiles.png" alt="Profiles"  />
-</li>
-</ul>
-</li>
+<li>Profiles : click on your profile and <code>Edit groups</code>, then ungroup your selected qualities</li>
 <li>Quality: Not changed</li>
-<li>Custom Formats: global
-<ol>
-<li>10bit: req ; <code>\b10bit\b</code></li>
-<li>3D:
-<ol>
-<li>3D: X ; <code>\b3d|sbs|half[ .-]ou|half[ .-]sbs\b</code></li>
-<li>BluRay3D: X ; <code>\b(BluRay3D)\b</code></li>
-</ol>
-</li>
-<li>x265 (HD):
-<ol>
-<li>x265/HEVC: req ; <code>[xh][ ._-]?265|\bHEVC(\b|\d)</code></li>
-<li><strong>Resolution</strong> Not 2160p: reg+neg ; <code>R2160p</code></li>
-</ol>
-</li>
-<li>HDR-10-10+:
-<ol>
-<li>HDR10+: req ; <code>\bHDR10(\+|P(lus)?\b)</code></li>
-<li>HDR10: req ; <code>\bHDR10(\b[^+|Plus])</code></li>
-<li>Not DV HDR10: neg+req ; <code>^(?=.*\b(DV|DoVi|Dolby[ .]?Vision)\b)(?=.*\b(HDR(10)?(?!\+))\b)</code></li>
-<li>HDR: req ; <code>\b(HDR)\b</code></li>
-<li>Not DV ; neg+req ; <code>\b(dv|dovi|dolby[ .]?vision)\b</code></li>
-<li>Not PQ: neg+req ; <code>\b(PQ)\b</code></li>
-<li>Not HLG: neg+req ; <code>\bHLG(\b|\d)</code></li>
-<li>Not SDR: neg+req ; <code>\bSDR(\b|\d)</code></li>
-<li><strong>Release Group</strong> Not RlsGrp (Missing HDR): neg+req ; <code>\b(FraMeSToR|HQMUX|SiCFoI)\b</code></li>
-</ol>
-</li>
-</ol>
-</li>
-<li>Custom Formats: French settings
-<ol>
-<li>French Audio:
-<ol>
-<li><strong>Language</strong> French Language: X ; <code>French</code></li>
-<li>French Original Version: X ; <code>\bVOF\b</code></li>
-<li>TRUEFRENCH: X ; <code>\b(TRUEFRENCH|VFF?)\b</code></li>
-<li>French International: X ; <code>\bVF(I|\d)\b</code></li>
-</ol>
-</li>
-<li>Multi Audio:
-<ol>
-<li>MULTi: X ; <code>\b(MULTi)(\d|\b)</code></li>
-<li>VO and VF: X ; <code>^(?=.*\b(VO)\b)(?=.*\b(VF(F|I)?)\b)</code></li>
-</ol>
-</li>
-<li>Multi French:
-<ol>
-<li>MULTi: req ; <code>\b(MULTi)(\b|\d)</code></li>
-<li><strong>Language</strong> Original Audio: req ; <code>Original</code></li>
-<li><strong>Language</strong> French Audio: req ; <code>French</code></li>
-</ol>
-</li>
-<li>VFF: req ; <code>\b(TRUEFRENCH|VFF)\b</code></li>
-</ol>
-</li>
-<li>Indexer: Add Torznab ; on Jackett click on &ldquo;Copy Torznab Feed&rdquo; and paste it in &ldquo;URL&rdquo; and copy-paste the API key pf jackett in API ; check everything ; select the categories you want</li>
+<li>Custom Formats: automatically imported with recyclarr</li>
+<li>Indexer: it&rsquo;ll be added automatically with Prowlarr</li>
 <li>Download Client:
 <ul>
 <li>add transmission</li>
@@ -711,33 +660,40 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 </ul>
 </li>
 </ol>
-<h4 id="sonarr-settings">Sonarr Settings<a hidden class="anchor" aria-hidden="true" href="#sonarr-settings">#</a></h4>
-<ol>
-<li>Media Management:
+
+<div class="notice info" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="92 59.5 300 300">
+  <path d="M292 303.25V272c0-3.516-2.734-6.25-6.25-6.25H267v-100c0-3.516-2.734-6.25-6.25-6.25h-62.5c-3.516 0-6.25 2.734-6.25 6.25V197c0 3.516 2.734 6.25 6.25 6.25H217v62.5h-18.75c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h87.5c3.516 0 6.25-2.734 6.25-6.25Zm-25-175V97c0-3.516-2.734-6.25-6.25-6.25h-37.5c-3.516 0-6.25 2.734-6.25 6.25v31.25c0 3.516 2.734 6.25 6.25 6.25h37.5c3.516 0 6.25-2.734 6.25-6.25Zm125 81.25c0 82.813-67.188 150-150 150-82.813 0-150-67.188-150-150 0-82.813 67.188-150 150-150 82.813 0 150 67.188 150 150Z"/>
+</svg>
+
+        </span>info</p><blockquote>
+<p>Go under <code>settings/general</code> and copy the API key, you&rsquo;ll need it for Prowlarr</p>
+</blockquote></div>
+
+
+<h3 id="prowlarr">Prowlarr<a hidden class="anchor" aria-hidden="true" href="#prowlarr">#</a></h3>
+<p>Add your indexer. In <code>Tags</code> field, add &ldquo;flaresolverr&rdquo;.</p>
+<p>In order to add <code>Flaresolverr</code> proxy:</p>
 <ul>
-<li>check <code>Replace Illegal Characters</code></li>
-<li>Path /downloads/medias/series</li>
+<li>go to <code>Settings &gt; Indexers</code></li>
+<li>add &ldquo;Flaresolverr&rdquo;</li>
+<li>make sure the tag is &ldquo;flaresolverr&rdquo;</li>
+<li>add this ip address: &ldquo;http://10.10.66.100:8191&rdquo;</li>
+<li>save</li>
+</ul>
+<p>Connect to Radarr/Sonarr:</p>
+<ul>
+<li>go to <code>Settings &gt; Apps</code></li>
+<li>add radarr:
+<ul>
+<li>full sync</li>
+<li>prowlarr server: http://10.10.66.100:9696</li>
+<li>radarr server: http://10.10.66.110:7878</li>
 </ul>
 </li>
-<li>Profiles:
-<ul>
-<li><img loading="lazy" src="/images/home-server/sonarr-profiles.png" alt="Quality Profiles"  />
-</li>
-<li>Language Profile: Multi: check English and French, and move them to the top of the list (English first, then French)</li>
-<li><a href="https://trash-guides.info/Sonarr/Sonarr-Release-Profile-RegEx/">Release Profiles</a></li>
-<li>You can add <code>/\bHDR(\b|\d)/</code> and <code>10bit</code> at <code>-10000</code> to avoid HDR and 10bit releases</li>
-<li>For Multi audio (VO+VFF):
-<pre tabindex="0"><code>/\bMULTi(\b|\d)/i ; 10000
-/\bMULTi(\b|\d)/i ; 10000
-/\bVOF(\b|\d)/i   ; 8000
-/\b(TRUEFRENCH|VFF?)(\b|\d)/i ; 6000
-/\bFR(A|ENCH)?(\b|\d)/i ; 4000
-/\bFR(A|ENCH)?(\b|\d)/i ; 3000
-</code></pre></li>
-<li>The others settings are the same as in radarr.</li>
 </ul>
-</li>
-</ol>
 <h3 id="jellyfin">Jellyfin<a hidden class="anchor" aria-hidden="true" href="#jellyfin">#</a></h3>
 <p>Follow the steps, it&rsquo;s easy.</p>
 <p>Create all the users who are going to access to Jellyfin <strong>and</strong> Jellyseerr.</p>
@@ -758,7 +714,7 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 <p>Follow the steps, it&rsquo;s easy.</p>
 <p>Sign in with your Jellyfin account and make sure to use the jellyfin <em>internal docker ip address</em> for the &ldquo;Jellyfin URL&rdquo;.</p>
 <p>When Syncing Librairies, uncheck &ldquo;Collections&rdquo;.</p>
-<p>Then, add your radarr and sonarr server (still with the <em>internal docker ip address</em>).</p>
+<p>Then, add your radarr and sonarr server (still with the internal docker ip address).</p>
 <p>Once this is done, you can sync Jellyfin users with Jellyseerr, so that they have the same account for Jellyfin and Jellyseerr.</p>
 <p>For sonarr server settings, make sure to check <em>Season folder</em>.</p>
 <h2 id="bonus">Bonus<a hidden class="anchor" aria-hidden="true" href="#bonus">#</a></h2>
@@ -772,116 +728,176 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 <li><a href="https://tailscale.com/kb/1131/synology/">Tailscale</a> on Synology</li>
 <li><a href="https://github.com/cloudflare/cloudflared">CloudFlare Tunnel</a></li>
 </ul>
+
+<div class="notice warning" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
+  <path d="M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z"/>
+</svg>
+
+        </span>warning</p><blockquote>
 <p>Pay attention to not use CloudFlare tunnel for Jellyfin streaming, you may be banned for breaking <a href="https://www.cloudflare.com/en-gb/terms/">TOS</a>.</p>
+</blockquote></div>
+
+
 <h3 id="webhooks">Webhooks<a hidden class="anchor" aria-hidden="true" href="#webhooks">#</a></h3>
 <p>I provide some webhooks for Jellyfin. These webhooks are used for:</p>
 <ul>
+<li><a href="/posts/home-server/#any-api-link">Any API (WhatsApp in my case)</a></li>
 <li><a href="/posts/home-server/#discord-webhook">Discord</a></li>
-<li><a href="/posts/home-server/#microsoft-teams-webhook">Microsoft Teams</a></li>
-<li><a href="/posts/home-server/#old-method-whatsapp-webhook">WhatsApp (old-method)</a></li>
-<li><a href="/posts/home-server/#new-method-whatsapp-webhook">WhatsApp (new-method)</a></li>
+<li><a href="/posts/home-server/#ms-teams-webhook">Microsoft Teams</a></li>
 </ul>
 <p>First of all, you need to install the Jellyfin plugin called &ldquo;Webhooks&rdquo;: Jellyfin &gt; Dashboard &gt; Plugins &gt; Catalog &gt; Webhook</p>
 <p>Then, you need to restart Jellyfin:</p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill/
 </span></span><span style="display:flex;"><span>$ docker-compose restart jellyfin
 </span></span></code></pre></div><p>Now, go back to Jellyfin in the Plugins tab and click on Webhook.</p>
-<p>The &ldquo;<em>Server Url</em>&rdquo; is your Jellyfin URL. If you expose it on internet, it&rsquo;s something like this: <a href="https://yourdomainname.com/jellyfin">https://yourdomainname.com/jellyfin</a></p>
+<p>The &ldquo;<em>Server Url</em>&rdquo; is your Jellyfin URL. If you expose it on internet, it&rsquo;s something like this: <a href="https://jellyfin.yourdomainname.com/">https://jellyfin.yourdomainname.com/</a></p>
 <p><em>If you don&rsquo;t have a domain name, Jellyfin will not be able to display images (posters) in the Discord/Teams webhooks.</em></p>
-<h4 id="global-webhook">Global Webhook<a hidden class="anchor" aria-hidden="true" href="#global-webhook">#</a></h4>
-<p>This method will allow you to send a webhook to any service/api you want in a very easy way.</p>
-<p>This consists of using your own API and create your request in Python (which is more flexible than the Jellyfin Webhook plugin) and send it to the API you want.</p>
-<p>To do this you will need to modify as your needs the <a href="https://github.com/garnajee/JellyHookAPI/blob/master/jellyhookapi.py">JellyHookAPI/jellyhookapi.py</a> file.</p>
-<p>Then, add the <a href="https://github.com/garnajee/home-server/tree/master/webhooks/jellyfin/global-item.handlebars">Handlebars template</a> in Jellyfin &gt; Plugin &gt; Webhook &gt; &ldquo;Generic Destination&rdquo;.</p>
-<p>And finally, build and run the docker image.</p>
-<p>All these steps are explained in the <a href="https://github.com/garnajee/JellyHookAPI/tree/master#jellyhookapi">JellyHookAPI/README</a> of the JellyHookAPI folder.</p>
-<h5 id="discord-webhook">Discord Webhook<a hidden class="anchor" aria-hidden="true" href="#discord-webhook">#</a></h5>
-<p>To add a <strong>Discord</strong> webhook:</p>
-<ul>
-<li>click on &ldquo;Add Discord Destination&rdquo;</li>
-<li>&ldquo;<em>Webhook Name</em>&rdquo;: what you want</li>
-<li>&ldquo;<em>Webhook Url</em>&rdquo;: the discord webhook url</li>
-<li>&ldquo;<em>Notification type</em>&rdquo;:
-<ol>
-<li>if you want to receive notification when a new item (movie/tv show/&hellip;) is added, check &ldquo;<em>Item Added</em>&rdquo;</li>
-<li>or when a user is locked out (because of too much wrong password during connection), check &ldquo;<em>User Locked Out</em>&rdquo;</li>
-<li>or when a user is created/deleted, when a password is changed, &hellip; (for every use case check <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users.handlebars">this file</a>), check &ldquo;<em>Authentication *</em>&rdquo; and &ldquo;<em>User *</em>&rdquo;</li>
-</ol>
-</li>
-<li>&ldquo;<em>User Filter</em>&rdquo;: personally, I don&rsquo;t check anything here</li>
-<li>&ldquo;<em>Item Type</em>&rdquo;: check everything (depending on your webhook template) <strong>except</strong> &ldquo;<em>Send All Properties</em>&rdquo;</li>
-<li>&ldquo;<em>Template</em>&rdquo;: (copy and paste the content)
-<ol>
-<li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-item.handlebars">discord-item.handlebars</a></li>
-<li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users-locked-out.handlebars">discord-users-locked-out.handlebars</a></li>
-<li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users.handlebars">discord-users.handlebars</a></li>
-</ol>
-</li>
-<li>&ldquo;<em>Avatar Url</em>&rdquo;: just change the avatar profile picture directly on Discord</li>
-<li>&ldquo;<em>Webhook Username</em>&rdquo;: should not be empty, but you can write what you want, the real username is defined directly in Discord</li>
-<li>&ldquo;<em>Mention Type</em>&rdquo;: I never used this</li>
-<li>&ldquo;<em>Embed Color</em>&rdquo;: color of the embedded message</li>
-</ul>
-<p>Then click save.</p>
-<h5 id="microsoft-teams-webhook">Microsoft Teams Webhook<a hidden class="anchor" aria-hidden="true" href="#microsoft-teams-webhook">#</a></h5>
-<p>To add a <strong>Microsoft Teams</strong> webhook:</p>
-<ul>
-<li>click on &ldquo;Add a Generic Destination&rdquo;</li>
-<li>check the steps for Discord, it&rsquo;s the same</li>
-<li>&ldquo;<em>Template</em>&rdquo;:
-<ol>
-<li>&ldquo;<em>Item Added</em>&rdquo;: <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-items.handlebars">teams-items.handlebars</a></li>
-<li>&ldquo;<em>User Locked Out</em>&rdquo;: <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users-locked-out.handlebars">teams-users-locked-out.handlebars</a></li>
-<li>&ldquo;<em>User</em>&rdquo;: <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users.handlebars">teams-users.handlebars</a></li>
-</ol>
-</li>
-</ul>
-<h5 id="old-method-whatsapp-webhook">Old method WhatsApp Webhook<a hidden class="anchor" aria-hidden="true" href="#old-method-whatsapp-webhook">#</a></h5>
-<p>(<em><strong>Old method - please refer to <a href="#global-webhook">the Global Webhook section</a> for the new (and better) method.</strong></em>)</p>
-<p>To add a <strong>WhatsApp</strong> webhook:</p>
-<p>Not as easy as the others.</p>
-<p>You need to connect your WhatsApp account as if you were logging on WhatsApp Web.</p>
-<p>To achieve this, you&rsquo;re going to use another docker-compose to self-host a WhatsApp HTTP API. I&rsquo;m using <a href="https://github.com/devlikeapro/whatsapp-http-api">this API</a>.</p>
-<p>Follow these steps:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>$ cd /opt/chill
-</span></span><span style="display:flex;"><span>$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-whatsapp.yml
-</span></span><span style="display:flex;"><span>$ docker-compose --file docker-compose-whatsapp.yml up -d
-</span></span></code></pre></div><blockquote>
-<p>Note that the docker-compose I provided is not really optimized, you can add environment variable to better configure. You can check the documentation <a href="https://waha.devlike.pro/docs/how-to/config/">here</a>.</p>
-</blockquote>
-<blockquote>
-<p><strong>Feel free to modify and perhaps make a pull request!</strong></p>
-</blockquote>
-<p>Then follow the <a href="https://github.com/devlikeapro/whatsapp-http-api#3-start-a-new-session">official</a> from step <strong>3</strong> to <strong>5</strong>. For any further information, like the id of a contact or a group, please read the <a href="https://waha.devlike.pro/docs/how-to/">documentation</a>.</p>
-<p>Go back to Jellyfin &gt; Plugin &gt; Webhook:</p>
-<ul>
-<li>click on &ldquo;Add Generic Form Destination&rdquo;</li>
-<li>&ldquo;<em>Webhook Url</em>&rdquo;: the <strong>internal</strong> docker ip, if you don&rsquo;t change anything in the docker-compose it should be: <code>http://10.10.66.200:3000/api/sendText</code></li>
-<li>then check what you want depending on the template</li>
-</ul>
-<p>Then copy and paste the template you want:</p>
-<ol>
-<li>&ldquo;<em>Item Added</em>&rdquo;: <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/whatsapp/whatsapp-items.handlebars">whatsapp-items.handlebars</a></li>
-<li>(very basic) &ldquo;<em>User created/deleted</em>&rdquo;: <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/whatsapp/whatsapp-basic-user.handlebars">whatsapp-basic-user.handlebars</a></li>
-</ol>
-<p>And finally you need to 2 Headers:</p>
-<ol>
-<li>&ldquo;<em>Key</em>&rdquo;: &ldquo;accept&rdquo;, &ldquo;<em>Value</em>&rdquo;: &ldquo;application/json&rdquo;</li>
-<li>&ldquo;<em>Key</em>&rdquo;: &ldquo;Content-Type&rdquo;, &ldquo;<em>Value</em>&rdquo;: &ldquo;application/json&rdquo;</li>
-</ol>
-<blockquote>
-<p>Please note, that we cannot send images with this API (it&rsquo;s a paid feature).</p>
-</blockquote>
-<blockquote>
-<p>(If you want to send the poster, refer to the new method <a href="/posts/home-server/#global-webhook"><em>(Global Webhook)</em></a>.)</p>
-</blockquote>
-<p>And that&rsquo;s it, you can save.</p>
-<h5 id="new-method-whatsapp-webhook">New method WhatsApp Webhook<a hidden class="anchor" aria-hidden="true" href="#new-method-whatsapp-webhook">#</a></h5>
-<p><em><strong>Please refer to the <a href="https://github.com/garnajee/home-server/tree/master/whatsapp-api#whatsapp-api">whatsapp-api/README</a> to install and configure this API.</strong></em></p>
-<p>This API allows you to send much more things than the previous one.</p>
+<details close>
+  <summary id="any-api-link">Any API</summary>
+    <p>This method will allow you to send a webhook to any service/api you want in a very easy way.</p>
+    <p>This consists of using your own API and create your request in Python (which is more flexible than the Jellyfin Webhook plugin) and send it to the API you want.</p>
+    <h5>Steps:</h5>
+    <ol>
+      <li>
+        <b>Modify the <em>jellyhookapi.py</em> file:</b><br>
+        You'll need to customize the <a href="https://github.com/garnajee/JellyHookAPI/blob/master/jellyhookapi.py">JellyHookAPI/jellyhookapi.py</a> file according to your specific needs.
+      </li>
+      <li>
+        <b>Add the Handlebars template:</b><br>
+        Navigate to Jellyfin > Plugin > Webhook > "Generic Destination" and add the <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/global-item.handlebars">Handlebars template</a>.
+      </li>
+      <li>
+        <b>Build and run the Docker image:</b><br>
+        For detailed instructions on building and running the Docker image, refer to the <a href="https://github.com/garnajee/JellyHookAPI/tree/master#jellyhookapi">JellyHookAPI/README</a> in the JellyHookAPI folder.
+      </li>
+    </ol>
+    <p>Finally, in my case, I wanted to send notification to a WhatsApp group. If you wan to do this, follow <a href="https://github.com/garnajee/home-server/blob/master/whatsapp-api#whatsapp-api">these instructions</a></p>
+
+</details>
+
+
+<details close>
+  <summary id="discord-webhook">Discord Webhook</summary>
+    <p>To add a <strong>Discord</strong> webhook:</p>
+    <ul>
+      <li>click on "Add Discord Destination"</li>
+      <li>"<em>Webhook Name</em>": what you want</li>
+      <li>"<em>Webhook Url</em>": the discord webhook url</li>
+      <li>"<em>Notification type</em>":</li>
+    <ol>
+      <li>if you want to receive notification when a new item (movie/tv show/...) is added, check "<em>Item Added</em>"</li>
+      <li>or when a user is locked out (because of too much wrong password during connection), check "<em>User Locked Out</em>"</li>
+      <li>or when a user is created/deleted, when a password is changed, ... (for every use case check <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users.handlebars">this file</a>), check "<em>Authentication</em>" and "<em>User</em>"</li>
+    </ol>
+    <li>"<em>User Filter</em>": personally, I don't check anything here</li>
+    <li>"<em>Item Type</em>": check everything (depending on your webhook template) <strong>except</strong> "<em>Send All Properties</em>"</li>
+    <li>"<em>Template</em>": (copy and paste the content)</li>
+    <ol>
+      <li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-item.handlebars">webhooks/jellyfin/discord/discord-item.handlebars</a></li>
+      <li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users-locked-out.handlebars">webhooks/jellyfin/discord/discord-users-locked-out.handlebars</a></li>
+      <li><a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/discord/discord-users.handlebars">webhooks/jellyfin/discord/discord-users.handlebars</a></li>
+    </ol>
+    <li>"<em>Avatar Url</em>": just change the avatar profile picture directly on Discord</li>
+    <li>"<em>Webhook Username</em>": should not be empty, but you can write what you want, the real username is defined directly in Discord</li>
+    <li>"<em>Mention Type</em>": I never used this</li>
+    <li>"<em>Embed Color</em>": color of the embedded message</li>
+  </ul>
+  <p>Then click save.</p>
+
+</details>
+
+
+<details close>
+  <summary id="ms-teams-webhook">Microsoft Teams Webhook</summary>
+  <p>To add a <strong>Microsoft Teams</strong> webhook:</p>
+  <ul>
+    <li>click on "Add a Generic Destination"</li>
+    <li>check the steps for Discord, it's the same</li>
+    <li>"<em>Template</em>":</li>
+    <ol>
+      <li>"<em>Item Added</em>": <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-items.handlebars">webhooks/jellyfin/ms-teams/teams-items.handlebars</a></li>
+      <li>"<em>User Locked Out</em>": <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users-locked-out.handlebars">webhooks/jellyfin/ms-teams/teams-users-locked-out.handlebars</a></li>
+      <li>"<em>User</em>": <a href="https://github.com/garnajee/home-server/blob/master/webhooks/jellyfin/ms-teams/teams-users.handlebars">webhooks/jellyfin/ms-teams/teams-users.handlebars</a></li>
+    </ol>
+  </ul>
+
+</details>
+
+
 <h3 id="fake-ratio">Fake Ratio<a hidden class="anchor" aria-hidden="true" href="#fake-ratio">#</a></h3>
-<p>If you need to fake your upload in order to have a ratio &gt;= 1, you can use <a href="https://github.com/garnajee/Ratio.py">Ratio.py</a>.</p>
+<p>If you need to fake your upload stats on (semi-)private indexers, in order to have a ratio &gt;= 1.</p>
+
+<div class="notice warning" >
+    <p class="notice-title">
+        <span class="icon-notice baseline">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
+  <path d="M297.431 324.397v-34.255c0-3.245-2.344-5.95-5.358-5.95h-32.146c-3.014 0-5.358 2.705-5.358 5.95v34.255c0 3.245 2.344 5.95 5.358 5.95h32.146c3.014 0 5.358-2.705 5.358-5.95Zm-.335-67.428 3.014-82.753c0-1.081-.502-2.524-1.674-3.425-1.005-.902-2.512-1.983-4.019-1.983h-36.834c-1.507 0-3.014 1.081-4.019 1.983-1.172.901-1.674 2.704-1.674 3.786l2.846 82.392c0 2.344 2.512 4.146 5.693 4.146h30.975c3.013 0 5.525-1.803 5.692-4.146Zm-2.344-168.39L423.34 342.425c3.683 7.032 3.516 15.686-.335 22.717-3.85 7.031-10.883 11.358-18.417 11.358H147.413c-7.534 0-14.566-4.327-18.417-11.358-3.85-7.031-4.018-15.685-.335-22.716L257.248 88.578C260.93 81.188 268.13 76.5 276 76.5c7.87 0 15.069 4.688 18.752 12.08Z"/>
+</svg>
+
+        </span>warning</p><blockquote>
 <p>I don&rsquo;t recommend using this indefinitely, please consider sharing to the community.</p>
+</blockquote></div>
+
+
+<p>You can use <a href="https://github.com/garnajee/Ratio.py">Ratio.py</a>.</p>
+<p>To use this python script in a secure way, you can add it in the <code>transmission-openvpn</code> docker (already running).
+That way, everything will go through the vpn.</p>
+<details close>
+  <summary id="fake-ratio-steps">To do this, follow these steps:</summary>
+  <ul>
+    <li>create the folder:</li>
+  </ul>
+
+  <pre>
+  <code>
+  $ cd /opt/chill
+  $ mkdir -p transovpn/ratio
+  </code>
+  </pre>
+
+  <ul>
+    <li>add this in the <code>docker-compose.yml</code>:</li>
+  </ul>
+
+  <pre>
+  <code>
+      volumes:
+        - ${BASE}/transovpn/config:/config
+        - ${DOWNLOADS}:/data
+        <span style="background-color: #008000">- ${BASE}/transovpn/ratio/:/home/</span>
+  </code>
+  </pre>
+
+  <ul>
+    <li>then download the content of <code>Ratio.py</code> repository inside the <code>ratio</code> folder.</li>
+    <li>download a very popular and highly leeched torrent file and put it inside the <code>ratio</code> folder.</li>
+    <li>modify the <code>config.json</code> file to match the torrent file name and path. Add your desired upload speed.</li>
+    <li>install python and run the script:</li>
+  </ul>
+
+  <pre>
+  <code>
+  $ cd /opt/chill/
+  $ docker exec -it transovpn bash
+  # apt update && apt install python3 python3-pip
+  # cd /home
+  # pip install -r requirements.txt
+  # nohup python3 ratio.py -c config.json &amp;
+  </code>
+  </pre>
+
+  <ul>
+    <li>to view logs : <code># tail -f nohup.out</code></li>
+  </ul>
+
+</details>
+
+
+<h1 id="license">License<a hidden class="anchor" aria-hidden="true" href="#license">#</a></h1>
+<p>This project is under <a href="https://github.com/garnajee/home-server/blob/master/LICENSE">MIT</a> License.</p>
 
 
   </div>
@@ -903,10 +919,10 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
     <br>
     <span>Removarr</span>
   </a>
-  <a class="next" href="http://localhost:1313/posts/new-home-server/">
+  <a class="next" href="http://localhost:1313/posts/settings/">
     <span class="title">Next »</span>
     <br>
-    <span>Home Server</span>
+    <span>My Settings</span>
   </a>
 </nav>
 
