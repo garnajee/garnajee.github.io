@@ -225,10 +225,7 @@
 </div>
 
   <div class="post-content">
-<head>
-<link rel="stylesheet" type="text/css" href="/css/notice.css"></head>
-
-<div class="notice warning" >
+<link rel="stylesheet" type="text/css" href="/css/notice.css"><div class="notice warning" >
     <p class="notice-title">
         <span class="icon-notice baseline">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="126 76.5 300 300">
@@ -245,9 +242,6 @@
 <p>This is my perfect docker-compose for my streaming server.</p>
 <p>You&rsquo;ll find two 2 docker-compose, one to create the streaming services and the other one to access them through a reverse proxy.</p>
 
-<head>
-</head>
-
 <div class="notice note" >
     <p class="notice-title">
         <span class="icon-notice baseline">
@@ -260,9 +254,6 @@
 </blockquote></div>
 
 
-
-<head>
-</head>
 
 <div class="notice info" >
     <p class="notice-title">
@@ -559,9 +550,6 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 </li>
 </ol>
 
-<head>
-</head>
-
 <div class="notice info" >
     <p class="notice-title">
         <span class="icon-notice baseline">
@@ -630,9 +618,6 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 <li><a href="https://github.com/cloudflare/cloudflared">CloudFlare Tunnel</a></li>
 </ul>
 
-<head>
-</head>
-
 <div class="notice warning" >
     <p class="notice-title">
         <span class="icon-notice baseline">
@@ -659,6 +644,7 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 </span></span></code></pre></div><p>Now, go back to Jellyfin in the Plugins tab and click on Webhook.</p>
 <p>The &ldquo;<em>Server Url</em>&rdquo; is your Jellyfin URL. If you expose it on internet, it&rsquo;s something like this: <a href="https://jellyfin.yourdomainname.com/">https://jellyfin.yourdomainname.com/</a></p>
 <p><em>If you don&rsquo;t have a domain name, Jellyfin will not be able to display images (posters) in the Discord/Teams webhooks.</em></p>
+<link rel="stylesheet" type="text/css" href="/css/details.css">
 <details close>
   <summary id="any-api-link">Any API</summary>
     <p>This method will allow you to send a webhook to any service/api you want in a very easy way.</p>
@@ -683,6 +669,7 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 </details>
 
 
+<link rel="stylesheet" type="text/css" href="/css/details.css">
 <details close>
   <summary id="discord-webhook">Discord Webhook</summary>
     <p>To add a <strong>Discord</strong> webhook:</p>
@@ -714,6 +701,7 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 </details>
 
 
+<link rel="stylesheet" type="text/css" href="/css/details.css">
 <details close>
   <summary id="ms-teams-webhook">Microsoft Teams Webhook</summary>
   <p>To add a <strong>Microsoft Teams</strong> webhook:</p>
@@ -734,9 +722,6 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 <h3 id="fake-ratio">Fake Ratio<a hidden class="anchor" aria-hidden="true" href="#fake-ratio">#</a></h3>
 <p>If you need to fake your upload stats on (semi-)private indexers, in order to have a ratio &gt;= 1.</p>
 
-<head>
-</head>
-
 <div class="notice warning" >
     <p class="notice-title">
         <span class="icon-notice baseline">
@@ -752,31 +737,24 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 <p>You can use <a href="https://github.com/garnajee/Ratio.py">Ratio.py</a>.</p>
 <p>To use this python script in a secure way, you can add it in the <code>transmission-openvpn</code> docker (already running).
 That way, everything will go through the vpn.</p>
+<link rel="stylesheet" type="text/css" href="/css/details.css">
 <details close>
   <summary id="fake-ratio-steps">To do this, follow these steps:</summary>
   <ul>
     <li>create the folder:</li>
   </ul>
 
-  <pre>
-  <code>
-  $ cd /opt/chill
-  $ mkdir -p transovpn/ratio
-  </code>
-  </pre>
+  <pre><code>$ cd /opt/chill
+$ mkdir -p transovpn/ratio</code></pre>
 
   <ul>
     <li>add this in the <code>docker-compose.yml</code>:</li>
   </ul>
 
-  <pre>
-  <code>
-      volumes:
-        - ${BASE}/transovpn/config:/config
-        - ${DOWNLOADS}:/data
-        <span style="background-color: #008000">- ${BASE}/transovpn/ratio/:/home/</span>
-  </code>
-  </pre>
+  <pre><code>volumes:
+  - ${BASE}/transovpn/config:/config
+  - ${DOWNLOADS}:/data
+  <span style="background-color: #008000">- ${BASE}/transovpn/ratio/:/home/</span></code></pre>
 
   <ul>
     <li>then download the content of <code>Ratio.py</code> repository inside the <code>ratio</code> folder.</li>
@@ -785,16 +763,12 @@ That way, everything will go through the vpn.</p>
     <li>install python and run the script:</li>
   </ul>
 
-  <pre>
-  <code>
-  $ cd /opt/chill/
-  $ docker exec -it transovpn bash
-  # apt update && apt install python3 python3-pip
-  # cd /home
-  # pip install -r requirements.txt
-  # nohup python3 ratio.py -c config.json &amp;
-  </code>
-  </pre>
+  <pre><code>$ cd /opt/chill/
+$ docker exec -it transovpn bash
+# apt update && apt install python3 python3-pip
+# cd /home
+# pip install -r requirements.txt
+# nohup python3 ratio.py -c config.json &amp;</code></pre>
 
   <ul>
     <li>to view logs : <code># tail -f nohup.out</code></li>
