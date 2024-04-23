@@ -538,25 +538,17 @@ That way, everything will go through the vpn.
     <li>create the folder:</li>
   </ul>
 
-  <pre>
-  <code>
-  $ cd /opt/chill
-  $ mkdir -p transovpn/ratio
-  </code>
-  </pre>
+  <pre><code>$ cd /opt/chill
+$ mkdir -p transovpn/ratio</code></pre>
 
   <ul>
     <li>add this in the <code>docker-compose.yml</code>:</li>
   </ul>
 
-  <pre>
-  <code>
-      volumes:
-        - ${BASE}/transovpn/config:/config
-        - ${DOWNLOADS}:/data
-        <span style="background-color: #008000">- ${BASE}/transovpn/ratio/:/home/</span>
-  </code>
-  </pre>
+  <pre><code>volumes:
+  - ${BASE}/transovpn/config:/config
+  - ${DOWNLOADS}:/data
+  <span style="background-color: #008000">- ${BASE}/transovpn/ratio/:/home/</span></code></pre>
 
   <ul>
     <li>then download the content of <code>Ratio.py</code> repository inside the <code>ratio</code> folder.</li>
@@ -565,16 +557,12 @@ That way, everything will go through the vpn.
     <li>install python and run the script:</li>
   </ul>
 
-  <pre>
-  <code>
-  $ cd /opt/chill/
-  $ docker exec -it transovpn bash
-  # apt update && apt install python3 python3-pip
-  # cd /home
-  # pip install -r requirements.txt
-  # nohup python3 ratio.py -c config.json &amp;
-  </code>
-  </pre>
+  <pre><code>$ cd /opt/chill/
+$ docker exec -it transovpn bash
+# apt update && apt install python3 python3-pip
+# cd /home
+# pip install -r requirements.txt
+# nohup python3 ratio.py -c config.json &amp;</code></pre>
 
   <ul>
     <li>to view logs : <code># tail -f nohup.out</code></li>
