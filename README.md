@@ -22,6 +22,20 @@ In my case:
 /layouts/_default/single.html
 ```
 
+## My changes
+
+Theme:
+
+- a red line appears below menu names when the mouse is moved over them
+- the name of the menu on the current page is written in red
+- hide share icons on the "about" page
+
+Shortcode:
+
+- `inlinespoiler`: hides text and reveals it on mouse-over
+- `details`: recreate the HTML `<details>` tag
+- `notice`: recreate the github markdown [alerts](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#alerts) style
+
 # Build
 
 You first need to [install Hugo](https://gohugo.io/categories/installation/).
