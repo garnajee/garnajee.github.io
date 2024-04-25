@@ -1,14 +1,32 @@
+/*
+ * notice: note, tip, important, warning, caution
+ */
+
 .notice {
     --root-color: #1f1f1f;
     --title-color: #1e1e1e;
-    --warning-title: #c33;
-    --warning-content: #fee;
-    --info-title: #fb7;
-    --info-content: #fec;
-    --note-title: #6be;
-    --note-content: #e7f2fa;
-    --tip-title: #5a5;
-    --tip-content: #efe
+    /* --note-title: #6be; */
+    /* --note-content: #e7f2fa; */
+    /* --tip-title: #5a5; */
+    /* --tip-content: #efe; */
+    /* --important-title: #5a5; */
+    /* --important-content: #efe; */
+    /* --warning-title: #fb7; */
+    /* --warning-content: #fec; */
+    /* --caution-title: #c33; */
+    /* --caution-content: #fee; */
+    --note-title: #4493f8;
+    --note-content: #e7f2fa; /**/
+    --tip-title: #3fb950;
+    --tip-content: #efe; /**/
+    --important-title: #a371f7;
+    --important-content: #f1e9fe;
+    --warning-title: #d29922;
+    --warning-content: #fec;
+    /*--caution-title: #f85149;*/
+    --caution-title: #da3633;
+    --caution-content: #fee;
+
 }
 
 .notice {
@@ -33,22 +51,6 @@
     background: var(--title-background)
 }
 
-.notice.warning .notice-title {
-    background: var(--warning-title)
-}
-
-.notice.warning {
-    background: var(--warning-content)
-}
-
-.notice.info .notice-title {
-    background: var(--info-title)
-}
-
-.notice.info {
-    background: var(--info-content)
-}
-
 .notice.note .notice-title {
     background: var(--note-title)
 }
@@ -63,6 +65,30 @@
 
 .notice.tip {
     background: var(--tip-content)
+}
+
+.notice.important .notice-title {
+    background: var(--important-title)
+}
+
+.notice.important {
+    background: var(--important-content)
+}
+
+.notice.warning .notice-title {
+    background: var(--warning-title)
+}
+
+.notice.warning {
+    background: var(--warning-content)
+}
+
+.notice.caution .notice-title {
+    background: var(--caution-title)
+}
+
+.notice.caution {
+    background: var(--caution-content)
 }
 
 .icon-notice {
@@ -108,16 +134,19 @@
   margin-bottom: 0px;
 }
 
-.notice.warning blockquote {
-  border-left: 4px solid #c33;
-}
-.notice.info blockquote {
-  border-left: 4px solid #fb7;
-}
 .notice.note blockquote {
-  border-left: 4px solid #6be;
+  border-left: 4px solid var(--note-title);
 }
 .notice.tip blockquote {
-  border-left: 4px solid #5a5;
+  border-left: 4px solid var(--tip-title);
+}
+.notice.important blockquote {
+  border-left: 4px solid var(--important-title);
+}
+.notice.warning blockquote {
+  border-left: 4px solid var(--warning-title);
+}
+.notice.caution blockquote {
+  border-left: 4px solid var(--caution-title);
 }
 
