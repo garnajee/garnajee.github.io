@@ -8,7 +8,7 @@ author: "Garnajee"
 draft: false
 ---
 
-{{< notice warning >}}
+{{< notice caution >}}
 > **Disclaimer:** *The author and contributors do not claim ownership of any services listed or used in this repository and are not legally responsible for any improper or illegal use. It is provided for educational purposes only. The repository does not endorse piracy or copyright infringement. Creating a media platform based on torrents may involve downloading copyrighted content, which, without proper authorization, may be illegal in many jurisdictions. All rights go to the owners of the software used.*
 {{< /notice >}}
 
@@ -24,7 +24,7 @@ You'll find two 2 docker-compose, one to create the streaming services and the o
 > I've also created a [`chill-extra`](https://github.com/garnajee/home-server/blob/master/chill-extra) folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the [removarr](https://github.com/garnajee/removarr) docker and other scripts.
 {{< /notice >}}
 
-{{< notice info >}}
+{{< notice important >}}
 > The only thing to modify is the `.env` file to suits your setup.
 {{< /notice >}}
 
@@ -345,7 +345,7 @@ If you want to have the same config, see the [`recyclarr-setup`](https://github.
     - check `Remove Completed`
     - `Remote Path Mappings`: Host: `10.10.66.100 (Transmission)` ; Remote Path: `/data/completed` ; Local Path: `/data/completed`
 
-{{< notice info >}}
+{{< notice important >}}
 > Go under `settings/general` and copy the API key, you'll need it for Prowlarr
 {{< /notice >}}
 
@@ -524,7 +524,7 @@ The "*Server Url*" is your Jellyfin URL. If you expose it on internet, it's some
 
 If you need to fake your upload stats on (semi-)private indexers, in order to have a ratio >= 1.
 
-{{< notice warning >}}
+{{< notice caution >}}
 > I don't recommend using this indefinitely, please consider sharing to the community.
 {{< /notice >}}
 
