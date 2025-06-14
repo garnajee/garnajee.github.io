@@ -4,7 +4,8 @@ title: Garnajee
 
 theme: "PaperMod"
 
-paginate: 5
+pagination:
+  pagerSize: 5
 
 enableRobotsTXT: true
 enableEmoji: true
@@ -46,7 +47,6 @@ params:
   ShowRssButtonInSectionTermList: true
   ShowToc: true   # Table of Content
   ShowBreadCrumbs: true # fil d'Ariane
-  social: true
 
   assets:
     favicon: "/favicon.ico"  # default path is /static
@@ -87,3 +87,6 @@ params:
     - name: Rss
       url: "index.xml"
 
+  #social:
+  #  GitHub: "https://github.com/garnajee"
+  #  RSS: "index.xml"
