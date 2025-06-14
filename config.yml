@@ -65,6 +65,8 @@ params:
         url: "/about"
       - name: Posts
         url: "/posts"
+      - name: Contact
+        url: "/contact"
 
 # **************************************************
   homeInfoParams:
@@ -78,8 +80,6 @@ params:
 
 # **************************************************
   socialIcons:
-    - name: "LinkedIn"
-      url: "https://linkedin.com/in/jean-sevaux"
     - name: "Github"
       url: "https://github.com/garnajee"
     - name: Rss
