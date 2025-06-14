@@ -81,12 +81,10 @@ params:
 
 # **************************************************
 
+  social: true
   socialIcons:
     - name: "Github"
       url: "https://github.com/garnajee"
     - name: Rss
       url: "index.xml"
 
-  #social:
-  #  GitHub: "https://github.com/garnajee"
-  #  RSS: "index.xml"
