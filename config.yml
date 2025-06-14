@@ -47,6 +47,12 @@ params:
   ShowToc: true   # Table of Content
   ShowBreadCrumbs: true # fil d'Ariane
 
+  socialIcons:
+    - name: "Github"
+      url: "https://github.com/garnajee"
+    - name: Rss
+      url: "index.xml"
+
   assets:
     favicon: "/favicon.ico"  # default path is /static
 
@@ -79,9 +85,4 @@ params:
         - check about page, to know more about me
 
 # **************************************************
-  socialIcons:
-    - name: "Github"
-      url: "https://github.com/garnajee"
-    - name: Rss
-      url: "index.xml"
 
