@@ -2,10 +2,11 @@
 title: "Règles du Tarot Africain et Compteur de Points en Ligne"
 date: 2025-11-10T15:16:31+01:00
 summary: "Apprenez les règles complètes du jeu de cartes du Tarot Africain. Découvrez comment compter les points et utilisez notre compteur en ligne gratuit pour suivre vos scores."
-aliases: []
+aliases: ["/posts/regles-tarot-africain", "/tarot-africain"]
 tags: ["Jeu de cartes", "Tarot Africain", "Règles du jeu", "Compteur de points"]
 author: "Garnajee"
-draft: true
+ShowWordCount: true
+draft: false
 ---
 
 ## Le But du Jeu
