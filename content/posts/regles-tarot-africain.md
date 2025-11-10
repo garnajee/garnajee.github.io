@@ -71,7 +71,7 @@ Pour vous simplifier la vie et éviter les erreurs de calcul, j'ai développé u
 
 **Découvrez mon compteur de points pour le Tarot Africain et lancez votre partie dès maintenant !**
 
-[**-> Accéder au Compteur de Points du Tarot Africain**]({{< ref "/tarot" >}})
+[**-> Accéder au Compteur de Points du Tarot Africain**]({{< relref "/tarot" >}})
 
 ---
 
