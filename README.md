@@ -77,3 +77,9 @@ $ cd themes/PaperMod
 $ git pull
 ```
 
+Or:
+
+```sh
+$ git submodule sync
+```
+
