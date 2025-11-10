@@ -82,7 +82,6 @@ params:
 
 # **************************************************
 
-  social: true
   socialIcons:
     - name: "Github"
       url: "https://github.com/garnajee"
