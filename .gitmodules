@@ -1,3 +1,7 @@
 [submodule "themes/PaperMod"]
 	path = themes/PaperMod
 	url = https://github.com/adityatelange/hugo-PaperMod.git
+[submodule "static/tarot"]
+	path = static/tarot
+	url = git@github.com:garnajee/compteur-points-tarot-africain.git
+	branch = gh-pages

@@ -42,6 +42,7 @@ params:
   author: Garnajee
   ShowShareButtons: true
   ShowReadingTime: true
+  ShareButtons: ["linkedin", "github", "rss"]
   ShowPostNavLinks: true    # Adds a Previous / Next post suggestion under a single post
   ShowCodeCopyButtons: true
   ShowRssButtonInSectionTermList: true
