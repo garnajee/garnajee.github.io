@@ -10,7 +10,9 @@ pagination:
 enableRobotsTXT: true
 enableEmoji: true
 
-googleAnalytics: "G-C3YDT1E2YB"
+#googleAnalytics: "G-C3YDT1E2YB"
+googleAnalytics: "G-651119VNYR"
+
 
 taxonomies:
   category: categories
