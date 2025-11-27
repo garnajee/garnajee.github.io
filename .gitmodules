@@ -3,7 +3,7 @@
 	url = https://github.com/adityatelange/hugo-PaperMod.git
 [submodule "static/tarot"]
 	path = static/tarot
-	url = https://github.com/garnajee/compteur-points-tarot-africain.git
+	url = git@github.com:garnajee/compteur-points-tarot-africain.git
 	branch = gh-pages
 [submodule "static/cookie-converter"]
 	path = static/cookie-converter
