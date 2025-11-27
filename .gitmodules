@@ -5,3 +5,7 @@
 	path = static/tarot
 	url = https://github.com/garnajee/compteur-points-tarot-africain.git
 	branch = gh-pages
+[submodule "static/cookie-converter"]
+	path = static/cookie-converter
+	url = git@github.com:garnajee/cookie-converter.git
+	branch = build
