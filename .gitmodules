@@ -9,3 +9,7 @@
 	path = static/cookie-converter
 	url = git@github.com:garnajee/cookie-converter.git
 	branch = build
+[submodule "static/formacheck"]
+	path = static/formacheck
+	url = git@github.com:garnajee/formacheck.git
+	branch = build
