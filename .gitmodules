@@ -13,3 +13,7 @@
 	path = static/formacheck
 	url = git@github.com:garnajee/formacheck.git
 	branch = build
+[submodule "static/metafilix"]
+	path = static/metafilix
+	url = git@github.com:garnajee/metafiliX.git
+	branch = build
