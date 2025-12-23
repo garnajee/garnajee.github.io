@@ -17,3 +17,7 @@
 	path = static/metafilix
 	url = git@github.com:garnajee/metafiliX.git
 	branch = build
+[submodule "static/mahjong"]
+	path = static/mahjong
+	url = git@github.com:garnajee/mahjong.git
+	branch = build
