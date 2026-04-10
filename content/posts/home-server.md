@@ -1,6 +1,6 @@
 ---
 title: "Home Server"
-date: 2023-04-25T10:11:41+02:00
+date: 2026-04-10T11:31:40+01:00
 summary: "A guide to create your perfect home server."
 aliases: ["/posts/home-server","/posts/server","/server"]
 tags: ["home-server","home-lab","server","lab","media","download","docker","docker-compose"]
@@ -16,16 +16,19 @@ draft: false
 
 In this very complete guide (available [here on github](https://github.com/garnajee/home-server/)), you'll be able to install from scratch a perfect home-server for a full media donwload and stream automation
 
-This is my perfect docker-compose for my streaming server.
+This guide uses a split architecture with two compose files:
 
-You'll find two 2 docker-compose, one to create the streaming services and the other one to access them through a reverse proxy.
+- `docker-compose-internal.yml` for internal automation and VPN-bound services
+- `docker-compose-public.yml` for user-facing services
+
+This change improves maintenance and uptime: internal services can be updated without interrupting public users (Jellyfin/Jellyseerr), and `qbittorrent` is now decoupled from the VPN stack through `gluetun`.
 
 {{< notice note >}}
 > I've also created a [`chill-extra`](https://github.com/garnajee/home-server/blob/master/chill-extra) folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the [removarr](https://github.com/garnajee/removarr) docker and other scripts.
 {{< /notice >}}
 
 {{< notice important >}}
-> The only thing to modify is the `.env` file to suits your setup.
+> The main method uses [`.env-example`](https://github.com/garnajee/home-server/blob/master/.env-example). Legacy Transmission setup uses [`.env-example-legacy`](https://github.com/garnajee/home-server/blob/master/.env-example-legacy).
 {{< /notice >}}
 
 Here, we are going to install everything under `/opt/chill/` (full streaming automation) and `/opt/docker/` (reverse proxy).
@@ -52,15 +55,18 @@ Synology Server:
 ## Medias Server
 ### What's inside
 
-This docker-compose contains:
+`docker-compose-internal.yml` contains:
 
-- [Transmission-openvpn](https://github.com/haugene/docker-transmission-openvpn)
+- [Gluetun](https://github.com/qdm12/gluetun)
+- [qBittorrent](https://www.qbittorrent.org/)
 - [Prowlarr](https://github.com/Prowlarr/Prowlarr)
-- [FlareSolverr](https://github.com/FlareSolverr/FlareSolverr)
-- [Jellyfin](https://github.com/jellyfin/jellyfin)
-- [Jellyseerr](https://github.com/Fallenbagel/jellyseerr)
 - [Radarr](https://github.com/Radarr/Radarr)
 - [Sonarr](https://github.com/Sonarr/Sonarr)
+
+`docker-compose-public.yml` contains:
+
+- [Jellyfin](https://github.com/jellyfin/jellyfin)
+- [Jellyseerr](https://github.com/Fallenbagel/jellyseerr)
 
 ### Installation
 
@@ -73,7 +79,8 @@ $ rm -rf /opt/chill
 * Create the structure for every services
 
 ```bash
-$ mkdir -p /opt/chill/{{jellyfin,jellyseerr,prowlarr,radarr,sonarr,transovpn}/config,storage/downloads/{watch,completed,incomplete,medias/{movies,series}}}
+$ mkdir -p /opt/chill/{qbit,prowlarr,radarr,sonarr,jellyfin,jellyseerr}/config
+$ mkdir -p /opt/chill/storage/downloads/{watch,completed,incomplete,medias/{movies,series}}
 ```
 
 Here is what it's going to create:
@@ -99,12 +106,12 @@ opt
     │       │   ├── movies
     │       │   └── series
     │       └── watch
-    └── transovpn
+    └── qbit
         └── config
 ```
 
 
-The `/opt/chill/storage/downloads/watch/` folder is used when you manually put `.torrent` files, so it's going to be downloaded automatically without any access to the Transmission interface.
+The `/opt/chill/storage/downloads/watch/` folder is used when you manually add `.torrent` files.
 
 * To check everything was properly created
 
@@ -112,19 +119,22 @@ The `/opt/chill/storage/downloads/watch/` folder is used when you manually put `
 $ ls -lR /opt/chill
 ```
 
-Download the [`docker-compose-medias.yml`](https://github.com/garnajee/home-server/blob/master/docker-compose-medias.yml) and [`.env-example`](https://github.com/garnajee/home-server/blob/master/.env-example) in `/opt/chill/`, and rename them:
+Download [`docker-compose-internal.yml`](https://github.com/garnajee/home-server/blob/master/docker-compose-internal.yml), [`docker-compose-public.yml`](https://github.com/garnajee/home-server/blob/master/docker-compose-public.yml) and [`.env-example`](https://github.com/garnajee/home-server/blob/master/.env-example) in `/opt/chill/`:
 
 ```bash
 $ cd /opt/chill
-$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-medias.yml -O docker-compose.yml
+$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-internal.yml -O docker-compose-internal.yml
+$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-public.yml -O docker-compose-public.yml
 $ wget https://raw.githubusercontent.com/garnajee/home-server/master/.env-example -O .env
 ```
 
 #### Modify `.env`
 
-Normally, you don't need to modify the docker-compose.yml file. Only the `.env` file.
+Normally, you don't need to modify compose files. Only the `.env` file.
 
-- list of [VPN PROVIDERS](https://haugene.github.io/docker-transmission-openvpn/supported-providers/)
+- `WG_PRV_KEY`
+- `WG_SERVER_COUNTRIES`
+- `QBIT_WEBUI_PORT`
 - local subnet mask for `NETWORKIP` (use this command to know yours) : `ip route | awk '!/ (docker0|br-)/ && /src/ {print $1}'`
 - PUID and PGID
 - TZ
@@ -146,13 +156,12 @@ $ docker network create net-chill -d bridge --subnet 10.10.66.0/24
 
 ### Run!
 
-For the first execution of the docker-compose, I recommend to use this command, to check if there is no errors:
-
-Move the `docker-compose.yml` and `.env` file in `/opt/chill/`.
+For first execution, start internal and public stacks independently:
 
 ```bash
 $ cd /opt/chill/
-$ docker-compose up
+$ docker compose -f docker-compose-internal.yml up -d
+$ docker compose -f docker-compose-public.yml up -d
 ```
 
 It's going to download all the images, and start all the services.
@@ -161,54 +170,40 @@ It's going to download all the images, and start all the services.
 
 Now, if you don't see any red lines among the hundreds of lines that have just scrolled through the terminal, it's usually a good sign.
 
-So you can now stop this by pressing `CTRL+c` (one or two times to force stop), and then run the docker-compose again, but in background this time:
-
-```bash
-$ cd /opt/chill/
-$ docker-compose up -d
-```
-
 Check the status of each docker:
 
 ```bash
-$ docker-compose ps -a
+$ docker compose -f docker-compose-internal.yml ps -a
+$ docker compose -f docker-compose-public.yml ps -a
 ```
 
 `Status` should be `Up`.
 
 ### Check VPN connection
 
-Now everything is up, just to be sure, you can check if Transmission goes through VPN:
+Now everything is up, just to be sure, you can check if Gluetun goes through VPN:
 
 ```bash
-$ docker exec -it transovpn curl ifconfig.co
+$ docker exec -it gluetun wget -qO- https://ifconfig.co
 XXX.XXX.XXX.XXX
 ```
 And then check the location of this ip address [here](https://ifconfig.co) for example.
 
-You can do the same command (just to be sure) for Prowlarr and Flaresolverr, they have the same ip address.
+You can do the same command for containers using `network_mode: service:gluetun`.
 
 ### Update docker's images
-#### Update one specific image
-
-To update one specific docker image:
+#### Update internal stack
 
 ```bash
-$ cd /opt/chill
-$ docker-compose stop <container_name>
-$ docker-compose rm <container_name>
-$ docker-compose pull <container_name>
-$ docker-compose up -d
+$ docker compose -f docker-compose-internal.yml pull
+$ docker compose -f docker-compose-internal.yml up -d
 ```
 
-#### Update all images
-
-To update all images:
+#### Update public stack
 
 ```bash
-$ docker-compose down
-$ docker-compose pull
-$ docker-compose up -d
+$ docker compose -f docker-compose-public.yml pull
+$ docker compose -f docker-compose-public.yml up -d
 ```
 
 ### Access services
@@ -217,13 +212,23 @@ To access services: (`IP` is the ip of your server)
 
 | **Service**          | **Address**  |
 |----------------------|--------------|
-| Transmission-openvpn | `<IP>:8000`  |
+| qBittorrent WebUI    | `<IP>:${QBIT_WEBUI_PORT}` |
 | Prowlarr             | `<IP>:8001`  |
-| FlareSolverr         | `<IP>:8002`  |
 | Jellyfin             | `<IP>:8003`  |
 | Jellyseerr           | `<IP>:8004`  |
 | Radarr               | `<IP>:8010`  |
 | Sonarr               | `<IP>:8011`  |
+
+## Legacy setup (single compose + Transmission-openvpn)
+
+If you still prefer the old method:
+
+```bash
+$ cd /opt/chill
+$ wget https://raw.githubusercontent.com/garnajee/home-server/master/docker-compose-medias.yml -O docker-compose-medias.yml
+$ wget https://raw.githubusercontent.com/garnajee/home-server/master/.env-example-legacy -O .env
+$ docker compose -f docker-compose-medias.yml up -d
+```
 
 ## Reverse Proxy
 
@@ -313,9 +318,10 @@ dns_ovh_consumer_key = agf6hU1g13uj86XXXXXXXXXfv1l2n3g4j
 * fill the information for: `*.yourdomain.com` and `yourdomain.com`
 
 ## Setup all the services
-### Transmission-openvpn
+### qBittorrent
 
-Nothing to setup or maybe the "Speed Limits" depending on your internet connection.
+Use categories, tags, priorities and queueing according to your workflow.
+For troubleshooting reference, see [`qBittorrent.conf`](https://github.com/garnajee/home-server/blob/master/qBittorrent.conf).
 
 ### Radarr & Sonarr
 
@@ -336,14 +342,14 @@ If you want to have the same config, see the [`recyclarr-setup`](https://github.
 4. Custom Formats: automatically imported with recyclarr
 5. Indexer: it'll be added automatically with Prowlarr
 6. Download Client:
-    - add transmission
+    - add qBittorrent
     - host: 10.10.66.100
-    - port: 9091
+    - port: 8080
     - set username and password
     - recent priority: `last`
     - older priority: `last`
     - check `Remove Completed`
-    - `Remote Path Mappings`: Host: `10.10.66.100 (Transmission)` ; Remote Path: `/data/completed/` ; Local Path: `/downloads/completed/`
+    - `Remote Path Mappings`: Host: `10.10.66.100 (qBittorrent)` ; Remote Path: `/data/completed/` ; Local Path: `/downloads/completed/`
 
 {{< notice important >}}
 > Go under `settings/general` and copy the API key, you'll need it for Prowlarr
@@ -351,15 +357,7 @@ If you want to have the same config, see the [`recyclarr-setup`](https://github.
 
 ### Prowlarr
 
-Add your indexer. In `Tags` field, add "flaresolverr".
-
-In order to add `Flaresolverr` proxy:
-
-- go to `Settings > Indexers`
-- add "Flaresolverr" 
-- make sure the tag is "flaresolverr"
-- add this ip address: "http://10.10.66.100:8191"
-- save
+Add your indexers and configure sync with Radarr/Sonarr.
 
 Connect to Radarr/Sonarr:
 
@@ -448,7 +446,7 @@ Then, you need to restart Jellyfin:
 
 ```bash
 $ cd /opt/chill/
-$ docker-compose restart jellyfin
+$ docker compose -f docker-compose-public.yml restart jellyfin
 ```
 
 Now, go back to Jellyfin in the Plugins tab and click on Webhook.
