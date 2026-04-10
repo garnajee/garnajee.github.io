@@ -1,6 +1,6 @@
 ---
 title: "Home Server"
-date: 2026-04-10T11:31:40+01:00
+date: 2026-04-10T09:31:40+01:00
 summary: "A guide to create your perfect home server."
 aliases: ["/posts/home-server","/posts/server","/server"]
 tags: ["home-server","home-lab","server","lab","media","download","docker","docker-compose"]
