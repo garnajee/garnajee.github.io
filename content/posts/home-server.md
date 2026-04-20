@@ -18,8 +18,8 @@ In this very complete guide (available [here on github](https://github.com/garna
 
 This guide uses a split architecture with two compose files:
 
-- `docker-compose-internal.yml` for internal automation and VPN-bound services
-- `docker-compose-public.yml` for user-facing services
+- [`docker-compose-internal.yml`](https://github.com/garnajee/home-server/blob/master/docker-compose-internal.yml) for internal automation and VPN-bound services
+- [`docker-compose-public.yml`](https://github.com/garnajee/home-server/blob/master/docker-compose-public.yml) for user-facing services
 
 This change improves maintenance and uptime: internal services can be updated without interrupting public users (Jellyfin/Seerr), and `qbittorrent` is now decoupled from the VPN stack through `gluetun`.
 
