@@ -21,7 +21,7 @@ This guide uses a split architecture with two compose files:
 - `docker-compose-internal.yml` for internal automation and VPN-bound services
 - `docker-compose-public.yml` for user-facing services
 
-This change improves maintenance and uptime: internal services can be updated without interrupting public users (Jellyfin/Jellyseerr), and `qbittorrent` is now decoupled from the VPN stack through `gluetun`.
+This change improves maintenance and uptime: internal services can be updated without interrupting public users (Jellyfin/Seerr), and `qbittorrent` is now decoupled from the VPN stack through `gluetun`.
 
 {{< notice note >}}
 > I've also created a [`chill-extra`](https://github.com/garnajee/home-server/blob/master/chill-extra) folder that automatically sends notifications on WhatsApp as soon as media is added in Jellyfin, add the [removarr](https://github.com/garnajee/removarr) docker and other scripts.
@@ -66,7 +66,7 @@ Synology Server:
 `docker-compose-public.yml` contains:
 
 - [Jellyfin](https://github.com/jellyfin/jellyfin)
-- [Jellyseerr](https://github.com/Fallenbagel/jellyseerr)
+- [Seerr](https://github.com/seerr-team/seerr)
 
 ### Installation
 
@@ -79,7 +79,7 @@ $ rm -rf /opt/chill
 * Create the structure for every services
 
 ```bash
-$ mkdir -p /opt/chill/{qbit,prowlarr,radarr,sonarr,jellyfin,jellyseerr}/config
+$ mkdir -p /opt/chill/{qbit,prowlarr,radarr,sonarr,jellyfin,seerr}/config
 $ mkdir -p /opt/chill/storage/downloads/{watch,completed,incomplete,medias/{movies,series}}
 ```
 
@@ -90,7 +90,7 @@ opt
 └── chill
     ├── jellyfin
     │   └── config
-    ├── jellyseerr
+    ├── seerr
     │   └── config
     ├── prowlarr
     │   └── config
@@ -215,7 +215,7 @@ To access services: (`IP` is the ip of your server)
 | qBittorrent WebUI    | `<IP>:${QBIT_WEBUI_PORT}` |
 | Prowlarr             | `<IP>:8001`  |
 | Jellyfin             | `<IP>:8003`  |
-| Jellyseerr           | `<IP>:8004`  |
+| Seerr                | `<IP>:8004`  |
 | Radarr               | `<IP>:8010`  |
 | Sonarr               | `<IP>:8011`  |
 
@@ -232,7 +232,7 @@ $ docker compose -f docker-compose-medias.yml up -d
 
 ## Reverse Proxy
 
-To access Jellyfin and Jellyseerr from outside your local network, you'll need to set up a reverse proxy.
+To access Jellyfin and Seerr from outside your local network, you'll need to set up a reverse proxy.
 
 For that purpose, I'm going to use [Nginx Proxy Manager](https://nginxproxymanager.com/setup/).
 
@@ -371,7 +371,7 @@ Connect to Radarr/Sonarr:
 
 Follow the steps, it's easy.
 
-Create all the users who are going to access to Jellyfin **and** Jellyseerr.
+Create all the users who are going to access to Jellyfin **and** Seerr.
 
 To have better images for your libraries, you can use [these images](https://imgur.com/a/Guqk15B).
 
@@ -387,7 +387,7 @@ Go into *Dashboard* > *General* > scroll down to the *CSS* section and add this 
 
 **Add a custom button in the menu**
 
-You can add a custom button to the Jellyfin menu. For example, you can add a link to Jellyseerr.
+You can add a custom button to the Jellyfin menu. For example, you can add a link to Seerr.
 
 To do that, you need to add this line in the Jellyfin's `volume` field in the docker-compose file:
 
@@ -401,7 +401,7 @@ And add the `web-config.json` file in your `/opt/chill/jellyfin/` folder.
 
 Read more [here](https://jellyfin.org/docs/general/clients/web-config/#custom-menu-links).
 
-### Jellyseerr
+### Seerr
 
 Follow the steps, it's easy.
 
@@ -411,7 +411,7 @@ When Syncing Librairies, uncheck "Collections".
 
 Then, add your radarr and sonarr server (still with the internal docker ip address).
 
-Once this is done, you can sync Jellyfin users with Jellyseerr, so that they have the same account for Jellyfin and Jellyseerr.
+Once this is done, you can sync Jellyfin users with Seerr, so that they have the same account for Jellyfin and Seerr.
 
 For sonarr server settings, make sure to check *Season folder*.
 
