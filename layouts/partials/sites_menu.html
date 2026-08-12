@@ -1,0 +1,63 @@
+{{- $sites := slice -}}
+
+{{- if os.FileExists ".gitmodules" -}}
+    {{- $gitmodules := os.ReadFile ".gitmodules" -}}
+    {{- $pathMatches := findRESubmatch `(?m)^[\t ]*path[\t ]*=[\t ]*(static/[^\r\n]+)` $gitmodules -}}
+
+    {{- range $pathMatches -}}
+        {{- $staticPath := strings.TrimSpace (index . 1) -}}
+        {{- $indexPath := printf "%s/index.html" $staticPath -}}
+
+        {{- if os.FileExists $indexPath -}}
+            {{- $sitePath := strings.TrimPrefix "static/" $staticPath -}}
+            {{- $fallbackTitle := replace $sitePath "/" " " | humanize | title -}}
+            {{- $siteTitle := $fallbackTitle -}}
+            {{- $indexContent := os.ReadFile $indexPath -}}
+            {{- $titleMatches := findRESubmatch `(?is)<title[^>]*>([^<]*)</title>` $indexContent 1 -}}
+
+            {{- with $titleMatches -}}
+                {{- $extractedTitle := index (index . 0) 1 | plainify | htmlUnescape | strings.TrimSpace -}}
+                {{- with $extractedTitle -}}
+                    {{- $siteTitle = . -}}
+                {{- end -}}
+            {{- end -}}
+
+            {{- $siteURL := printf "%s/" $sitePath | relURL -}}
+            {{- $sites = $sites | append (dict "title" $siteTitle "url" $siteURL) -}}
+        {{- end -}}
+    {{- end -}}
+{{- end -}}
+
+{{- with sort $sites "title" "asc" -}}
+<details class="sites-menu" data-sites-menu>
+    <summary class="sites-menu__trigger">Sites</summary>
+    <nav class="sites-menu__panel" aria-label="Sites">
+        <ul class="sites-menu__list">
+            {{- range . }}
+            <li><a href="{{ .url }}">{{ .title }}</a></li>
+            {{- end }}
+        </ul>
+    </nav>
+</details>
+{{- print " · " -}}
+<script>
+    (() => {
+        const sitesMenu = document.currentScript.previousElementSibling;
+        if (!sitesMenu || !sitesMenu.matches('[data-sites-menu]')) return;
+
+        document.addEventListener('click', (event) => {
+            if (sitesMenu.open && !sitesMenu.contains(event.target)) {
+                sitesMenu.open = false;
+            }
+        });
+
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && sitesMenu.open) {
+                sitesMenu.open = false;
+                sitesMenu.querySelector('summary').focus();
+                event.preventDefault();
+            }
+        });
+    })();
+</script>
+{{- end -}}
